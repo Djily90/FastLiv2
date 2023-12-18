@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Fast Liv</string>
+    <string name="connexion">Connexion</string>
+    <string name="inscription">Inscription</string>
+    <string name="connecter">Se conneter</string>
+    <string name="inscrire">S\'inscrire</string>
+    <string name="email">Email</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="pas_de_compte">Pas de compte, inscrivez-vous,</string>
+    <string name="ici">ici</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">Welcome !</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">Login failed</string>
+    <string name="phone">Tél</string>
+    <string name="immatriculation">Immatriculation</string>
+    <string name="logo">logo</string>
+    <string name="btnback">btnBack</string>
+
+    <string-array name="role">
+        <item>Chauffeur</item>
+        <item>Client</item>
+        <item>Planificateur</item>
+    </string-array>
+</resources>
