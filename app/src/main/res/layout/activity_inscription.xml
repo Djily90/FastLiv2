@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/immatriculation"
+        android:id="@+id/inscrire_immatriculation"
         android:layout_width="369dp"
         android:layout_height="48dp"
         android:layout_marginTop="28dp"
@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list_role" />
+        app:layout_constraintTop_toBottomOf="@+id/inscrire_role" />
 
     <EditText
         android:id="@+id/inscrire_password"
@@ -73,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <EditText
-        android:id="@+id/editTextPhone"
+        android:id="@+id/inscrire_phone"
         android:layout_width="369dp"
         android:layout_height="48dp"
         android:layout_marginTop="28dp"
@@ -81,7 +81,6 @@
         android:background="@color/white"
         android:ems="10"
         android:hint="@string/phone"
-
         android:inputType="phone"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
@@ -91,16 +90,16 @@
         app:layout_constraintTop_toBottomOf="@+id/inscrire_password" />
 
     <Spinner
-        android:id="@+id/list_role"
+        android:id="@+id/inscrire_role"
         android:layout_width="369dp"
         android:layout_height="48dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/bg_spinner"
-        android:entries="@array/role"
+        android:entries="@array/Roles"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+        app:layout_constraintTop_toBottomOf="@+id/inscrire_phone" />
 
     <ImageView
         android:id="@+id/logo"

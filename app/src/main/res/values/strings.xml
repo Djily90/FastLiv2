@@ -22,7 +22,7 @@
     <string name="logo">logo</string>
     <string name="btnback">btnBack</string>
 
-    <string-array name="role">
+    <string-array name="Roles">
         <item>Chauffeur</item>
         <item>Client</item>
         <item>Planificateur</item>
