@@ -9,18 +9,12 @@ public class Utilisateur {
     private String immatriculation;
 
 
-    public Utilisateur(int id, String email, String telephone, String password, String role, String immatriculation) {
-        super();
-        this.id = id;
-        this.email = email;
-        this.telephone = telephone;
-        this.password = password;
-        this.role = role;
+    public Utilisateur() {
+
     }
 
 
     public Utilisateur(String email,  String password, String telephone, String role, String immatriculation) {
-        super();
         this.email = email;
         this.telephone = telephone;
         this.password = password;
@@ -28,13 +22,14 @@ public class Utilisateur {
         this.immatriculation = immatriculation;
     }
 
-    public Utilisateur(String email,  String password, String telephone, String role) {
-        super();
+
+    public Utilisateur(String email, String telephone, String role, String immatriculation) {
         this.email = email;
         this.telephone = telephone;
-        this.password = password;
         this.role = role;
+        this.immatriculation = immatriculation;
     }
+
 
 
     public int getId() {
