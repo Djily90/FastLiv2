@@ -104,26 +104,28 @@ public class Inscription extends AppCompatActivity  implements View.OnClickListe
             }
             else {
                 Utilisateur user = new Utilisateur(inputEmail.getText().toString(),
-                inputPassword.getText().toString(), inputPhone.getText().toString(),
+                inputPhone.getText().toString(),
                 inputRole, inputImmatriculation.getText().toString());
-                createUser(user);
+                createUser(user, inputPassword.getText().toString());
             }
 
         }
     }
 
-    public void createUser(Utilisateur u){
-        mAuth.createUserWithEmailAndPassword(u.getEmail(), u.getPassword())
+    public void createUser(Utilisateur u, String password){
+        mAuth.createUserWithEmailAndPassword(u.getEmail(), password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            FirebaseUser user = mAuth.getCurrentUser();
+
                             Toast.makeText(Inscription.this, "Utilisateur ajouté", Toast.LENGTH_SHORT).show();
+                            u.setUuid(user.getUid());
                             utilisateurBDD.addUserToCollection(u);
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("djily", "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
                             Log.d("djily", user.getEmail());
                             Intent myIntent1 = new Intent(Inscription.this, MainActivity.class);
                             startActivity(myIntent1);

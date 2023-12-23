@@ -1,7 +1,7 @@
 package com.example.fastliv.model;
 
 public class Utilisateur {
-    private int id;
+    private String uuid;
     private String email;
     private String telephone;
     private String password;
@@ -14,15 +14,6 @@ public class Utilisateur {
     }
 
 
-    public Utilisateur(String email,  String password, String telephone, String role, String immatriculation) {
-        this.email = email;
-        this.telephone = telephone;
-        this.password = password;
-        this.role = role;
-        this.immatriculation = immatriculation;
-    }
-
-
     public Utilisateur(String email, String telephone, String role, String immatriculation) {
         this.email = email;
         this.telephone = telephone;
@@ -31,14 +22,23 @@ public class Utilisateur {
     }
 
 
-
-    public int getId() {
-        return id;
+    public Utilisateur(String uuid, String email, String telephone, String role, String immatriculation) {
+        this.uuid =  uuid;
+        this.email = email;
+        this.telephone = telephone;
+        this.role = role;
+        this.immatriculation = immatriculation;
     }
 
 
-    public void setId(int id) {
-        this.id = id;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 
 
@@ -92,7 +92,7 @@ public class Utilisateur {
 
     @Override
     public String toString() {
-        return "Utilisateur [id=" + id + ", email=" + email + ", telephone=" + telephone + ", password=" + password
+        return "Utilisateur [id=" + uuid + ", email=" + email + ", telephone=" + telephone + ", password=" + password
                 + ", role=" + role + "]";
     }
 }
