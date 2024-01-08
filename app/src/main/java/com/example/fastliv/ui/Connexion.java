@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.example.fastliv.MainActivity;
 import com.example.fastliv.R;
 import com.example.fastliv.cotroller.UtilisateurBDD;
-import com.example.fastliv.model.Client;
 import com.example.fastliv.model.Utilisateur;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

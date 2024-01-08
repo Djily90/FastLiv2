@@ -3,11 +3,13 @@ package com.example.fastliv.model;
 public class Produit {
     private String nom;
     private String quantite;
+    private String image;
 
 
-    public Produit(String nom, String quantite) {
+    public Produit(String nom, String quantite, String image) {
         this.nom = nom;
         this.quantite = quantite;
+        this.image = image;
     }
 
     public Produit() {
@@ -20,11 +22,11 @@ public class Produit {
     public void setNom(String nom) {
         this.nom = nom;
     }
-    public String getDescription() {
-        return quantite;
+    public String getImage() {
+        return image;
     }
-    public void setDescription(String quantite) {
-        this.quantite = quantite;
+    public void setImage(String image) {
+        this.image = image;
     }
 
 
