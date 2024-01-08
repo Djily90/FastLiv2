@@ -21,6 +21,9 @@
     <string name="immatriculation">Immatriculation</string>
     <string name="logo">logo</string>
     <string name="btnback">btnBack</string>
+    <string name="client">Client</string>
+    <string name="btnPanier">Panier</string>
+    <string name="btnLogOut">Déconnecter</string>
 
     <string-array name="Roles">
         <item>Chauffeur</item>
