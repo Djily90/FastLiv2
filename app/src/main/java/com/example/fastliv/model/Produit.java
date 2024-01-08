@@ -5,11 +5,15 @@ public class Produit {
     private String quantite;
     private String image;
 
+    private String prix;
 
-    public Produit(String nom, String quantite, String image) {
+
+
+    public Produit(String nom, String quantite, String image, String prix) {
         this.nom = nom;
         this.quantite = quantite;
         this.image = image;
+        this.prix = prix;
     }
 
     public Produit() {
@@ -27,6 +31,12 @@ public class Produit {
     }
     public void setImage(String image) {
         this.image = image;
+    }
+    public String getPrix() {
+        return prix;
+    }
+    public void setPrix(String prix) {
+        this.prix = prix;
     }
 
 

@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.fastliv.R;
 import com.example.fastliv.cotroller.ProductAdapter;
@@ -30,6 +34,8 @@ public class Client extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
 
+
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         List<Produit> listProduits = new ArrayList<Produit>();
         db.collection("produits")
@@ -40,7 +46,7 @@ public class Client extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("djily", document.getId() + " => " + document.get("quantité"));
-                                listProduits.add(new Produit(document.get("nom").toString(), document.get("quantité").toString(),document.get("image").toString()));
+                                listProduits.add(new Produit(document.get("nom").toString(), document.get("quantité").toString(),document.get("image").toString(),document.get("prix").toString()));
                             }
                             revProducts = findViewById(R.id.revProducts);
                             revProducts.setLayoutManager(new LinearLayoutManager(Client.this));
@@ -52,4 +58,6 @@ public class Client extends AppCompatActivity {
                 });
 
     }
+
+
 }

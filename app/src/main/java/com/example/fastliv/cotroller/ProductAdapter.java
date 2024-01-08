@@ -7,8 +7,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,10 +27,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     private Context context;
     private List<Produit> products;
+    private ArrayAdapter<CharSequence> dataAdapter;
 
     public ProductAdapter(Context context, List<Produit> products) {
         this.context = context;
         this.products = products;
+
+
+        dataAdapter = ArrayAdapter.createFromResource(this.context
+                , R.array.Quantites, android.R.layout.simple_spinner_item);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
     }
 
     @NonNull
@@ -47,6 +58,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .into(holder.ivProduct);
         holder.tvName.setText(p.getNom());
+        holder.tvPrix.setText(p.getPrix());
+        holder.spinner.setAdapter(dataAdapter);
+
+
     }
 
     @Override
@@ -57,12 +72,32 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public class ProductViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivProduct;
-        TextView tvName;
+        TextView tvName, tvPrix;
+        public Spinner spinner;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             ivProduct = (ImageView) itemView.findViewById(R.id.ivProduct);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
+            tvPrix = (TextView) itemView.findViewById(R.id.tvPrix);
+
+            spinner = (Spinner)itemView.findViewById(R.id.spinner_prix);
+
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    // On selecting a spinner item
+                    String item = parent.getItemAtPosition(position).toString();
+                    // Showing selected spinner item
+                    Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         }
     }
 }
