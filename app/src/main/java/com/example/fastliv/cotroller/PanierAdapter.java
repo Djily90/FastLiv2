@@ -1,7 +1,4 @@
-
-
 package com.example.fastliv.cotroller;
-
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,18 +19,23 @@ import com.bumptech.glide.Glide;
 import com.example.fastliv.R;
 import com.example.fastliv.model.Produit;
 import com.google.firebase.auth.FirebaseAuth;
-
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FieldValue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.PanierViewHolder> {
 
     private Context context;
     private List<Produit> products;
     private ArrayAdapter<CharSequence> dataAdapter;
+    private PanierAdapter panierAdapter;
 
-    public ProductAdapter(Context context, List<Produit> products) {
+    public PanierAdapter(Context context, List<Produit> products) {
         this.context = context;
         this.products = products;
 
@@ -46,14 +48,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @NonNull
     @Override
-    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PanierViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.product_item, parent, false);
-        return new ProductViewHolder(view);
+        View view = inflater.inflate(R.layout.panier_item, parent, false);
+        return new PanierViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PanierViewHolder holder, int position) {
         Produit p = products.get(position);
         String url = p.getImage();
         Glide.with(context)
@@ -73,21 +75,23 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return products.size();
     }
 
-    public class ProductViewHolder extends RecyclerView.ViewHolder {
+    public class PanierViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivProduct;
         TextView tvName, tvPrix;
         public Spinner spinner;
         String quantite;
-        Button btnAjouter;
+        Button btnSupprimer;
         Activity activity;
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-        public ProductViewHolder(@NonNull View itemView) {
+
+        public PanierViewHolder(@NonNull View itemView) {
             super(itemView);
             ivProduct = (ImageView) itemView.findViewById(R.id.ivProduct);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvPrix = (TextView) itemView.findViewById(R.id.tvPrix);
-            btnAjouter = (Button) itemView.findViewById(R.id.btn_supprimer);
+            btnSupprimer = (Button) itemView.findViewById(R.id.btn_supprimer);
             spinner = (Spinner)itemView.findViewById(R.id.spinner_prix);
             activity = new Activity();
             List<Produit> listProduitSelectione = new ArrayList<Produit>();
@@ -110,7 +114,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                 }
             });
 
-            btnAjouter.setOnClickListener(new View.OnClickListener() {
+            btnSupprimer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d("djily", "element ajouté " + tvName.getText() + " " + quantite);
@@ -123,7 +127,30 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                         }
                     }
                     Produit p = new Produit(tvName.getText().toString(), quantite, urlImage ,tvPrix.getText().toString());
-                    commandeBDD.addProductToPanier(p);
+
+                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    DocumentReference panierRef = db.collection("paniers").document(userId);
+                    // Étape 1: Supprimer le produit de la liste locale
+
+
+                    // Étape 2: Mettre à jour Firestore
+                    userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                    // Créez une Map représentant le produit à supprimer
+                    Map<String, Object> produitToRemove = new HashMap<>();
+                    produitToRemove.put("image", p.getImage());
+                    produitToRemove.put("nom", p.getNom());
+                    produitToRemove.put("prix", p.getPrix());
+                    produitToRemove.put("quantite", p.getQuantite());
+                    // Ajoutez les autres attributs de Produit si nécessaire
+
+                    // Utilisez FieldValue.arrayRemove pour supprimer le produit du tableau 'produits' dans Firestore
+                    panierRef.update("produits", FieldValue.arrayRemove(produitToRemove))
+                            .addOnSuccessListener(aVoid -> {
+                                Log.d("djily", "Produit retiré du panier");
+                            })
+                            .addOnFailureListener(e -> Log.e("djily", "Erreur lors de la suppression du produit", e));
+
 
                 }
             });

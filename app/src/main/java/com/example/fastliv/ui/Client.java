@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import com.example.fastliv.MainActivity;
 import com.example.fastliv.R;
 import com.example.fastliv.cotroller.ProductAdapter;
 import com.example.fastliv.model.Produit;
@@ -33,8 +35,6 @@ public class Client extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client);
-
-
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         List<Produit> listProduits = new ArrayList<Produit>();
@@ -57,6 +57,12 @@ public class Client extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    public void goToPanier() {
+        Intent myInt = new Intent(Client.this, Panier.class);
+        startActivity(myInt);
+        //         startActivity(new Intent(Client.this, Panier.class));
     }
 
 

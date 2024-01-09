@@ -39,5 +39,12 @@ public class Produit {
         this.prix = prix;
     }
 
+    public String getQuantite() {
+        return quantite;
+    }
+    public void setQuantite(String quantite) {
+        this.prix = quantite;
+    }
+
 
 }

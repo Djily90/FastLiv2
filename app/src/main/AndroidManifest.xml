@@ -13,16 +13,19 @@
         android:theme="@style/Theme.FastLiv"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.Connexion"
-            android:exported="false" />
-        <activity
-            android:name=".ui.Inscription"
-            android:exported="false" />
+            android:name=".ui.Panier"
+            android:exported="true" />
         <activity
             android:name=".ui.Client"
+            android:exported="true" />
+        <activity
+            android:name=".ui.Connexion"
+            android:exported="true" />
+        <activity
+            android:name=".ui.Inscription"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

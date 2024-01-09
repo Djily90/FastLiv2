@@ -1,25 +1,20 @@
 package com.example.fastliv.ui;
 
-import static android.content.ContentValues.TAG;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.fastliv.MainActivity;
 import com.example.fastliv.R;
 import com.example.fastliv.cotroller.UtilisateurBDD;
-import com.example.fastliv.model.Utilisateur;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -96,14 +91,13 @@ public class Connexion extends AppCompatActivity  implements View.OnClickListene
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d("djily", "signInWithEmail:success");
+                            //Log.d("djily", "signInWithEmail:success");
 
-                            Log.d("djily", user.getUid());
+                            //Log.d("djily", user.getUid());
                             getUserByUuid(user.getUid());
-
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w("djily", "signInWithEmail:failure", task.getException());
+                            //Log.w("djily", "signInWithEmail:failure", task.getException());
 
                         }
                     }
@@ -120,11 +114,11 @@ public class Connexion extends AppCompatActivity  implements View.OnClickListene
                         if (task.isSuccessful()) {
                             String role="";
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("djily", document.getId() + " => " + document.getString("role"));
+                               // Log.d("djily", document.getId() + " => " + document.getString("role"));
                                 role = document.getString("role");
                             }
                             if (role.equals("Client")){
-                                Log.d("djily", "yesssssssss");
+                                //Log.d("djily", "yesssssssss");
                                 Intent myInt = new Intent(Connexion.this, Client.class);
                                 startActivity(myInt );
                             }

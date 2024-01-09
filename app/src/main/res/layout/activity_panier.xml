@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#162471"
+    android:padding="2dp"
+    tools:context=".ui.Panier">
+
+    <ImageView
+        android:id="@+id/btn_retour"
+        android:layout_width="18dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/btnLogOut"
+        android:onClick="goToClient"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/btn_back" />
+
+
+
+    <TextView
+        android:id="@+id/titre_panier"
+        android:layout_width="111dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="124dp"
+        android:text="@string/panier"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/btn_retour"
+        app:layout_constraintStart_toEndOf="@+id/btn_deconnexion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/revPaniers"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="15dp"
+        android:background="#162471"
+        android:padding="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_retour"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/input_adresse"
+        android:layout_width="369dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="23dp"
+        android:autofillHints="Immatriculation"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="@string/adresse"
+        android:inputType="text"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDateChoisie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/revPaniers" />
+
+    <Button
+        android:id="@+id/btn_valider_commande"
+        android:layout_width="270dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="48dp"
+        android:text="@string/commander"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDateChoisie" />
+
+    <TextView
+        android:id="@+id/textViewDateChoisie"
+        android:layout_width="369dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:layout_marginBottom="29dp"
+        android:gravity="center_horizontal"
+        android:text="date de livraison"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/btn_valider_commande"
+        app:layout_constraintTop_toBottomOf="@+id/input_adresse"
+        tools:layout_editor_absoluteX="21dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

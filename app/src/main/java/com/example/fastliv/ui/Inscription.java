@@ -142,7 +142,5 @@ public class Inscription extends AppCompatActivity  implements View.OnClickListe
     public void goBack() {
         Intent myIntent1 = new Intent(Inscription.this, MainActivity.class);
         startActivity(myIntent1);
-
-
     }
 }

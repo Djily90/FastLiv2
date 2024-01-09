@@ -24,6 +24,14 @@
     <string name="client">Client</string>
     <string name="btnPanier">Panier</string>
     <string name="btnLogOut">Déconnecter</string>
+    <string name="add">Ajouter\n</string>
+    <string name="saved_id_client" />
+    <string name="saved_nom_client" />
+    <string name="saved_email_client" />
+    <string name="supprimer">Supprimer</string>
+    <string name="panier">Panier</string>
+    <string name="adresse">Adresse</string>
+    <string name="commander">Commander</string>
 
     <string-array name="Roles">
         <item>Chauffeur</item>
@@ -32,10 +40,10 @@
     </string-array>
 
     <string-array name="Quantites">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
+        <item>1 kg</item>
+        <item>2 kg</item>
+        <item>3 kg</item>
+        <item>4 kg</item>
+        <item>5 kg</item>
     </string-array>
 </resources>
