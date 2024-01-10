@@ -2,6 +2,7 @@ package com.example.fastliv.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.fastliv.R;
@@ -13,6 +14,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -25,6 +28,8 @@ import org.osmdroid.tileprovider.MapTileProviderBasic;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.tileprovider.util.SimpleRegisterReceiver;
 import org.osmdroid.util.BoundingBox;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
@@ -42,11 +47,15 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MapsActivity2 extends FragmentActivity {
+public class MapsActivity2 extends AppCompatActivity implements View.OnClickListener{
 
     private MapView mapView;
     private TextView textViewDistance, textViewTime;
     private  List<GeoPoint> geoPoints = new ArrayList<>();
+
+    private Button btnValiderLiv, btnAnnulerLiv;
+
+    private String emailChauffeur;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +69,21 @@ public class MapsActivity2 extends FragmentActivity {
         mapView.setBuiltInZoomControls(true);
         mapView.setMultiTouchControls(true);
 
+        btnValiderLiv = findViewById(R.id.btn_valider_liv);
+        btnValiderLiv.setOnClickListener(this);
+        btnAnnulerLiv = findViewById(R.id.btn_annuler_liv);
+        btnAnnulerLiv.setOnClickListener(this);
+
         IMapController mapController = mapView.getController();
         mapController.setZoom(16); // Replace with desired zoom level
+
+        this.emailChauffeur = getEmailChauffeur();
 
         List<GeoPoint> testGeoPoints = getSampleGeoPoints();
         mapController.setCenter(testGeoPoints.get(0));
         BoundingBox boundingBox = BoundingBox.fromGeoPoints(testGeoPoints);
         //mapView.zoomToBoundingBox(boundingBox, true);
-        for (GeoPoint g: testGeoPoints){
-            Log.d("djily", " recu =>"+String.valueOf(g.getLatitude()));
-        }
+
 
 
         // Add markers
@@ -123,6 +137,9 @@ public class MapsActivity2 extends FragmentActivity {
 
         return receivedGeoPoints;
     }
+    private String getEmailChauffeur(){
+        return getIntent().getStringExtra("emailChauffeur");
+    }
 
     private class HttpPostRequest extends AsyncTask<String, Void, String> {
         @Override
@@ -135,7 +152,7 @@ public class MapsActivity2 extends FragmentActivity {
                 JSONObject json2 = new JSONObject(makeHttpRequest1(urls[1]));
                 JSONArray distances = json.getJSONArray("distances");
                 JSONArray time = json.getJSONArray("durations");
-                StringBuilder distancesAndDurationsText = new StringBuilder("Distances and Durations: ");
+                StringBuilder distancesAndDurationsText = new StringBuilder("");
 
                 for (int j = 0; j < distances.length()-1; j++) {
                     JSONArray dist = distances.getJSONArray(j);
@@ -156,8 +173,8 @@ public class MapsActivity2 extends FragmentActivity {
                     // Append distances and durations to the StringBuilder
 
                     distancesAndDurationsText
-                            .append("étape "+(j+1)+" Distance: ").append(dista+"m").append(", ")
-                            .append("Duration: ").append((timerr/60)+"min")
+                            .append("Etape "+(j+1)+": Distance = ").append(dista+"m").append(" & ")
+                            .append("Durée = ").append((timerr/60)+" min")
                             .append(" | ");
                 }
                 // Display distances and durations
@@ -299,6 +316,16 @@ public class MapsActivity2 extends FragmentActivity {
         newPolyline.setWidth(15);
 
         mapView.getOverlayManager().add(newPolyline);
+    }
+
+    public void onClick(View view) {
+        if(view == btnValiderLiv){
+
+        }
+
+        if(view == btnAnnulerLiv){
+
+        }
     }
 
 }

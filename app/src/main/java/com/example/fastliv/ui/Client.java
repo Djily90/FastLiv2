@@ -56,8 +56,8 @@ public class Client extends AppCompatActivity implements View.OnClickListener{
         btnSignOut.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
                 mAuth.signOut();
-                Intent myInt = new Intent(Client.this, MainActivity.class);
-                startActivity(myInt);
+                Intent myInt5 = new Intent(Client.this, Connexion.class);
+                startActivity(myInt5);
             }
         });
 

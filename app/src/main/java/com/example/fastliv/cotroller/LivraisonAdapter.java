@@ -30,8 +30,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import org.osmdroid.util.GeoPoint;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.QueryDocumentSnapshot;import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
@@ -53,6 +53,7 @@ public class LivraisonAdapter extends RecyclerView.Adapter<LivraisonAdapter.Chau
         this.chauffeurs = chauffeurs;
 
 
+
     }
 
     @NonNull
@@ -67,6 +68,7 @@ public class LivraisonAdapter extends RecyclerView.Adapter<LivraisonAdapter.Chau
     public void onBindViewHolder(@NonNull ChauffeurViewHolder holder, int position) {
         Livraison l = chauffeurs.get(position);
         holder.tvEmalClientLiv.setText(l.getEmailClient());
+        holder.tvEmalChauffeurLiv.setText(l.getEmailChauffeur());
         holder.tvStatutLiv.setText(l.getStatutLivraison());
         Geocoder geoCoder = new Geocoder(context, Locale.getDefault());
         List<Address> addr;
@@ -76,7 +78,6 @@ public class LivraisonAdapter extends RecyclerView.Adapter<LivraisonAdapter.Chau
             throw new RuntimeException(e);
         }
       //  holder.tvAdresseLiv.setText(addr.get(0).getFeatureName()+ addr.get(0).getThoroughfare() +addr.get(0).getLocality());
-        holder.tvAdresseLiv.setText(addr.get(0).getFeatureName()+ addr.get(0).getThoroughfare() +addr.get(0).getLocality());
         holder.tvAdresseLiv.setText(addr.get(0).getLocality());
         holder.tvAdresseComplet.setText(l.getAdresse().getLatitude()+","+l.getAdresse().getLongitude());
         if (l.getStatutLivraison().equals("en cours")){
@@ -99,7 +100,7 @@ public class LivraisonAdapter extends RecyclerView.Adapter<LivraisonAdapter.Chau
 
     public class ChauffeurViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvEmalClientLiv, tvStatutLiv,  tvAdresseLiv, tvAdresseComplet;
+        TextView tvEmalClientLiv, tvStatutLiv,  tvAdresseLiv, tvAdresseComplet, tvEmalChauffeurLiv;
         Button btnAceepterLiv, btnRefuserLiv;
         Activity activity;
 
@@ -112,6 +113,7 @@ public class LivraisonAdapter extends RecyclerView.Adapter<LivraisonAdapter.Chau
         public ChauffeurViewHolder(@NonNull View itemView) {
             super(itemView);
             tvEmalClientLiv = (TextView) itemView.findViewById(R.id.tvEmailClientLiv);
+            tvEmalChauffeurLiv = (TextView) itemView.findViewById(R.id.tvEmailChauffeurLiv);
             tvStatutLiv = (TextView) itemView.findViewById(R.id.tvStatutLiv);
             tvAdresseLiv = (TextView) itemView.findViewById(R.id.tvAdresseLiv);
             tvAdresseComplet = (TextView) itemView.findViewById(R.id.tvAdresseComplet);
@@ -136,7 +138,9 @@ public class LivraisonAdapter extends RecyclerView.Adapter<LivraisonAdapter.Chau
                 Livraison liv = new Livraison(
                         tvStatutLiv.getText().toString(),
                         adrLiv,
-                        tvEmalClientLiv.getText().toString()
+                        tvEmalClientLiv.getText().toString(),
+                        tvEmalChauffeurLiv.getText().toString()
+
 
                 );
 

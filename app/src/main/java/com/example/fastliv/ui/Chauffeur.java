@@ -30,14 +30,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.CustomZoomButtonsController;
+import com.google.firebase.firestore.QueryDocumentSnapshot;import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 
@@ -57,6 +57,7 @@ public class Chauffeur extends AppCompatActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_livraison);
         listLivraisons = new ArrayList<Livraison>();
+        String getCurrentUserEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
         textViewTitreChauffeur = findViewById(R.id.titre_assignerChauffeur);
         textViewTitreChauffeur.setOnClickListener(this);
@@ -69,37 +70,6 @@ public class Chauffeur extends AppCompatActivity implements View.OnClickListener
             }
         });
 
-
-
-
-/*
-        MapView map = findViewById(R.id.mapView);
-        map.setTileSource(TileSourceFactory.MAPNIK);
-        map.getZoomController().setVisibility(
-                CustomZoomButtonsController.Visibility.SHOW_AND_FADEOUT
-        );
-        map.setMultiTouchControls(true);
-        IMapController mapController = map.getController();
-        mapController.setZoom(17.0);
-        GeoPoint esigelec = new GeoPoint(49.383430,1.0773341);
-        mapController.setCenter(esigelec);
-
-        Marker startMarker = new Marker(map);
-        startMarker.setTitle("ESIGELEC");
-        map.getOverlayManager().add(startMarker);
-
-
-
-
- */
-
-
-
-
-
-       // i.getStringExtra("name");
-       // Log.d("djily", "date liv recu => " + commandeSelectionner.getAdresse().toString());
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("livraison")
@@ -110,14 +80,19 @@ public class Chauffeur extends AppCompatActivity implements View.OnClickListener
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                //  Log.d("djily", "email chauffeur => " + document.get("email").toString());
-                                com.google.firebase.firestore.GeoPoint geoPointFirestore = (com.google.firebase.firestore.GeoPoint) document.get("adresse");
-                                org.osmdroid.util.GeoPoint geoPointOsmdroid = new org.osmdroid.util.GeoPoint(geoPointFirestore.getLatitude(), geoPointFirestore.getLongitude());
-                                listLivraisons.add(new Livraison(
-                                        (String) document.get("statutLivraison"),
-                                        (GeoPoint) geoPointOsmdroid,
-                                        (String) document.get("emailClient")
-                                ));
+                                //Log.d("djily", "email chauffeur => " + document.get("email").toString());
+                               // com.google.firebase.firestore.GeoPoint geoPointFirestore = (com.google.firebase.firestore.GeoPoint) document.get("adresse");
+                              //  org.osmdroid.util.GeoPoint geoPointOsmdroid = new org.osmdroid.util.GeoPoint(geoPointFirestore.getLatitude(), geoPointFirestore.getLongitude());
+                                if(document.get("emailChauffeur").toString().equals(getCurrentUserEmail)
+                                        || document.get("statutLivraison").toString().equals("en cours")){
+                                    listLivraisons.add(new Livraison(
+                                            (String) document.get("statutLivraison"),
+                                            (GeoPoint) document.get("adresse"),
+                                            (String) document.get("emailClient"),
+                                            (String) document.get("emailChauffeur")
+                                    ));
+                                }
+
                             }
                             revLivraison = findViewById(R.id.revChauffeur);
                             revLivraison.setLayoutManager(new LinearLayoutManager(Chauffeur.this));
@@ -134,14 +109,26 @@ public class Chauffeur extends AppCompatActivity implements View.OnClickListener
                 Intent myInt = new Intent(Chauffeur.this, MapsActivity2.class);
 
                 List<GeoPoint> listGeopoints = new ArrayList<GeoPoint>();
+                String emailChauffeur = "";
+
                 for (Livraison l : listLivraisons){
 
                     if(l.getStatutLivraison().equals("accepté")){
                         listGeopoints.add(l.getAdresse());
+                        emailChauffeur = l.getEmailChauffeur();
                     }
                 }
 
-                myInt.putParcelableArrayListExtra("ListGeoPoints", (ArrayList<GeoPoint>) listGeopoints);
+               // com.google.firebase.firestore.GeoPoint geoPointFirestore = (com.google.firebase.firestore.GeoPoint) document.get("adresse");
+                //org.osmdroid.util.GeoPoint geoPointOsmdroid = new org.osmdroid.util.GeoPoint(geoPointFirestore.getLatitude(), geoPointFirestore.getLongitude());
+
+                ArrayList<com.google.firebase.firestore.GeoPoint> geoPointFirestore = (ArrayList<com.google.firebase.firestore.GeoPoint>) listGeopoints;
+                ArrayList<org.osmdroid.util.GeoPoint> geoPointOsmdroid = new ArrayList<org.osmdroid.util.GeoPoint>();
+                for (com.google.firebase.firestore.GeoPoint geoPoint: geoPointFirestore){
+                    geoPointOsmdroid.add(new org.osmdroid.util.GeoPoint(geoPoint.getLatitude(), geoPoint.getLongitude()));
+                }
+                myInt.putParcelableArrayListExtra("ListGeoPoints", geoPointOsmdroid);
+                myInt.putExtra("emailChauffeur", emailChauffeur);
                 startActivity(myInt);
             }
         });

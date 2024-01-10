@@ -20,8 +20,7 @@ import com.example.fastliv.model.Commande;
 import com.example.fastliv.ui.AssignerChauffeur;
 import com.example.fastliv.ui.Planificateur;
 import com.google.firebase.firestore.FirebaseFirestore;
-import org.osmdroid.util.GeoPoint;
-
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,8 +55,14 @@ public class CommandeAdapter extends RecyclerView.Adapter<CommandeAdapter.Comman
         Commande c = commandes.get(position);
         holder.tvemailClient.setText(c.getEmailClient());
         String LatLong = String.valueOf(c.getAdresse().getLatitude()) + ","+String.valueOf(c.getAdresse().getLongitude());
-        holder.tvAdresse.setText( LatLong);
+        holder.tvAdresse.setText(LatLong);
         holder.tvIdClient.setText(c.getIdClient());
+
+        if (c.getEmailChauffeur() == null){
+            holder.tvEmailChauffeur.setText("pas de chauffeur");
+        }else {
+            holder.tvEmailChauffeur.setText(c.getEmailChauffeur());
+        }
         holder.tvStatut.setText(c.getStatut());
         holder.tvDateLivraison.setText(c.getDateLivraison().toString());
         if (c.getStatut().equals("en cours")){
@@ -76,7 +81,7 @@ public class CommandeAdapter extends RecyclerView.Adapter<CommandeAdapter.Comman
 
     public class CommandeViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvemailClient, tvStatut, tvDateLivraison, tvAdresse, tvIdClient;
+        TextView tvemailClient, tvStatut, tvDateLivraison, tvAdresse, tvIdClient, tvEmailChauffeur;
         Button btnVoirCommande;
         Activity activity;
 
@@ -87,6 +92,7 @@ public class CommandeAdapter extends RecyclerView.Adapter<CommandeAdapter.Comman
         public CommandeViewHolder(@NonNull View itemView) {
             super(itemView);
             tvemailClient = (TextView) itemView.findViewById(R.id.tvemailClient);
+            tvEmailChauffeur = (TextView) itemView.findViewById(R.id.tvemailChauffeurCommande);
             tvStatut = (TextView) itemView.findViewById(R.id.tvStatutCommande);
             tvDateLivraison = (TextView) itemView.findViewById(R.id.tvDateLivraison);
             tvAdresse = (TextView) itemView.findViewById(R.id.tvAdresseCommande);
@@ -117,47 +123,12 @@ public class CommandeAdapter extends RecyclerView.Adapter<CommandeAdapter.Comman
                    intent.putExtra("dateLivraison", tvDateLivraison.getText());
                    intent.putExtra("idClient", tvIdClient.getText());
                    intent.putExtra("emailClient", tvemailClient.getText());
+                   intent.putExtra("emailChauffeur", tvEmailChauffeur.getText());
                    intent.putExtra("statutCommande", tvStatut.getText());
                    v.getContext().startActivity(intent);
 
 
 
-                   /* Log.d("djily", "element ajouté " + tvName.getText() + " " + quantite);
-                    Log.d("djily",  "id  : " + FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    CommandeBDD commandeBDD = new CommandeBDD();
-                    String urlImage="";
-                    for (Commande c : commandes){
-                        if (c.getNom() == tvName.getText()){
-                            urlImage = c.getImage();
-                        }
-                    }
-                    Commande c = new Produit(tvName.getText().toString(), quantite, urlImage ,tvPrix.getText().toString());
-
-                    String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    DocumentReference panierRef = db.collection("paniers").document(userId);
-                    // Étape 1: Supprimer le produit de la liste locale
-
-
-                    // Étape 2: Mettre à jour Firestore
-                    userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-                    // Créez une Map représentant le produit à supprimer
-                    Map<String, Object> produitToRemove = new HashMap<>();
-                    produitToRemove.put("image", p.getImage());
-                    produitToRemove.put("nom", p.getNom());
-                    produitToRemove.put("prix", p.getPrix());
-                    produitToRemove.put("quantite", p.getQuantite());
-                    // Ajoutez les autres attributs de Produit si nécessaire
-
-                    // Utilisez FieldValue.arrayRemove pour supprimer le produit du tableau 'produits' dans Firestore
-                    panierRef.update("produits", FieldValue.arrayRemove(produitToRemove))
-                            .addOnSuccessListener(aVoid -> {
-                                Log.d("djily", "Produit retiré du panier");
-                            })
-                            .addOnFailureListener(e -> Log.e("djily", "Erreur lors de la suppression du produit", e));
-
-
-*/
 
                 }
             });

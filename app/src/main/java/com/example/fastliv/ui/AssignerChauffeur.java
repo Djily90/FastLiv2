@@ -18,8 +18,8 @@ import com.example.fastliv.model.Utilisateur;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
-import org.osmdroid.util.GeoPoint;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.QueryDocumentSnapshot;import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -44,7 +44,8 @@ public class AssignerChauffeur extends AppCompatActivity {
                 i.getStringExtra("idClient"),
                 adr,
                 i.getStringExtra("statutCommande"),
-                Calendar.getInstance().getTime());
+                Calendar.getInstance().getTime(),
+               i.getStringExtra("emailChauffeur"));
 
 
 
@@ -87,11 +88,7 @@ public class AssignerChauffeur extends AppCompatActivity {
 
     }
 
-    public void goToPlanification() {
-        Intent myInt = new Intent(AssignerChauffeur.this, Planificateur.class);
-        startActivity(myInt);
-        //         startActivity(new Intent(Client.this, Panier.class));
-    }
+
 
 
 }

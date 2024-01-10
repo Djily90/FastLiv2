@@ -1,4 +1,6 @@
 package com.example.fastliv.model;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+
 import org.osmdroid.util.GeoPoint;
 
 import java.util.ArrayList;

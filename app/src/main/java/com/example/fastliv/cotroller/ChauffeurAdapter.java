@@ -89,7 +89,7 @@ public class ChauffeurAdapter extends RecyclerView.Adapter<ChauffeurAdapter.Chau
             tvEmalChauffeur = (TextView) itemView.findViewById(R.id.tvEmailChauffeur);
             tvStatutChauffeur = (TextView) itemView.findViewById(R.id.tvStatutChauffeur);
             tvNumeroChauffeur = (TextView) itemView.findViewById(R.id.tvNumeroChauffeur);
-            btnAssignerChauffeur = (Button) itemView.findViewById(R.id.btnAccepterLiv);
+            btnAssignerChauffeur = (Button) itemView.findViewById(R.id.btnAssignerLiv);
             activity = new Activity();
             List<Utilisateur> listChauffeurs = new ArrayList<Utilisateur>();
             planificateur = new Planificateur();
@@ -120,7 +120,8 @@ public class ChauffeurAdapter extends RecyclerView.Adapter<ChauffeurAdapter.Chau
                             chauffeurassigner,
                             commandeChoisi.getAdresse(),
                             listCommande,
-                            commandeChoisi.getEmailClient()
+                            commandeChoisi.getEmailClient(),
+                            commandeChoisi.getEmailChauffeur()
                     );
 
                  AddLivraisonToFirebase(livr);
@@ -164,6 +165,7 @@ public class ChauffeurAdapter extends RecyclerView.Adapter<ChauffeurAdapter.Chau
                                                             @Override
                                                             public void onSuccess(Void aVoid) {
                                                                 commandeChoisi.setStatut("assigné");
+                                                                commandeChoisi.setEmailChauffeur(livraison.getChauffeur().getEmail());
                                                                 db.collection("commandes")
                                                                         .add(commandeChoisi)
                                                                         .addOnSuccessListener(documentReference -> {

@@ -47,7 +47,7 @@
         android:contentDescription="@string/btnMap"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/panier" />
+        app:srcCompat="@android:drawable/ic_dialog_map" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/revChauffeur"

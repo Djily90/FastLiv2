@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
@@ -88,7 +88,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvPrix = (TextView) itemView.findViewById(R.id.tvPrix);
             btnAjouter = (Button) itemView.findViewById(R.id.btn_supprimer);
-            spinner = (Spinner)itemView.findViewById(R.id.spinner_prix);
+            spinner = (Spinner)itemView.findViewById(R.id.spinner_quantite_produit);
             activity = new Activity();
             List<Produit> listProduitSelectione = new ArrayList<Produit>();
 

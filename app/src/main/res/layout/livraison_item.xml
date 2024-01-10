@@ -29,6 +29,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tvEmailChauffeurLiv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@android:drawable/sym_action_email"
+            android:drawableTint="@color/principal"
+            android:text="emailChauffeurLiv"
+            android:textColor="#000"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvEmailClientLiv" />
+
 
         <TextView
             android:id="@+id/tvStatutLiv"
@@ -43,7 +57,7 @@
             android:textColor="#000"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvEmailClientLiv" />
+            app:layout_constraintTop_toBottomOf="@+id/tvEmailChauffeurLiv" />
         <TextView
             android:id="@+id/tvAdresseLiv"
             android:layout_width="wrap_content"
@@ -51,7 +65,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:drawableLeft="@android:drawable/ic_menu_directions"
-            android:drawablePadding="6sp"
+            android:drawablePadding="1sp"
             android:drawableTint="@color/principal"
             android:text="statut"
             android:textColor="#000"

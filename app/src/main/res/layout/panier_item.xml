@@ -51,16 +51,6 @@
             app:layout_constraintStart_toEndOf="@+id/ivProduct"
             app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
-        <Spinner
-            android:id="@+id/spinner_prix"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="5dp"
-            app:layout_constraintLeft_toRightOf="@+id/ivProduct"
-            app:layout_constraintStart_toEndOf="@+id/ivProduct"
-            app:layout_constraintTop_toBottomOf="@+id/tvPrix" />
-
         <Button
             android:id="@+id/btn_supprimer"
 

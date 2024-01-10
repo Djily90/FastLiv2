@@ -24,8 +24,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import org.osmdroid.util.GeoPoint;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.QueryDocumentSnapshot;import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.type.DateTime;
 
@@ -66,11 +66,14 @@ public class Planificateur extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("djily", document.getId() + " Date => " + document.get("dateLivraison"));
+                              //  com.google.firebase.firestore.GeoPoint geoPointFirestore = (com.google.firebase.firestore.GeoPoint) document.get("adresse");
+                              //  org.osmdroid.util.GeoPoint geoPointOsmdroid = new org.osmdroid.util.GeoPoint(geoPointFirestore.getLatitude(), geoPointFirestore.getLongitude());
                                 listCommandes.add(new Commande((String) document.get("emailClient")
                                         ,(String) document.get("idClient")
                                         ,(GeoPoint) document.get("adresse")
                                         ,(String) document.get("statut"),
-                                        document.getTimestamp("dateLivraison").toDate()));
+                                        document.getTimestamp("dateLivraison").toDate()
+                                        ,(String) document.get("emailChauffeur")));
                             }
                             revCommandes = findViewById(R.id.revCommandes);
                             revCommandes.setLayoutManager(new LinearLayoutManager(Planificateur.this));

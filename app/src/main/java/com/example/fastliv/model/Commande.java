@@ -3,8 +3,8 @@ package com.example.fastliv.model;
 import android.location.Address;
 import android.location.Geocoder;
 
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.util.GeoPoint;
+
+import com.google.firebase.firestore.GeoPoint;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,25 +20,28 @@ public class Commande {
     private Date dateLivraison;
 
     private String emailClient;
+    private String emailChauffeur;
 
 
     public Commande(){
 
     }
-    public Commande(List<Produit> produits, String idClient, GeoPoint adresse, String statut, Date dateLivraison){
+    public Commande(List<Produit> produits, String idClient, GeoPoint adresse, String statut, Date dateLivraison, String emailChauffeur){
         this.produits = produits;
         this.idClient = idClient;
         this.adresse = adresse;
         this.statut = statut;
         this.dateLivraison = dateLivraison;
+        this.emailChauffeur = emailChauffeur;
     }
 
-    public Commande(String emailClient, String idClient, GeoPoint adresse, String statut, Date dateLivraison){
+    public Commande(String emailClient, String idClient, GeoPoint adresse, String statut, Date dateLivraison, String emailChauffeur){
         this.emailClient = emailClient;
         this.idClient = idClient;
         this.adresse = adresse;
         this.statut = statut;
         this.dateLivraison = dateLivraison;
+        this.emailChauffeur = emailChauffeur;
     }
 
     public List<Produit> getProduits() {
@@ -53,6 +56,12 @@ public class Commande {
     }
     public void setEmailClient(String emailClient){
         this.emailClient = emailClient;
+    }
+    public String getEmailChauffeur(){
+        return emailChauffeur;
+    }
+    public void setEmailChauffeur(String emailChauffeur){
+        this.emailChauffeur = emailChauffeur;
     }
 
     public String getIdClient(){

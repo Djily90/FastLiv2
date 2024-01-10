@@ -29,6 +29,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tvemailChauffeurCommande"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="emailChauffeur"
+            android:drawableLeft="@android:drawable/sym_action_email"
+            android:drawableTint="@color/principal"
+            android:textColor="#000"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvemailClient" />
+
 
         <TextView
             android:id="@+id/tvStatutCommande"
@@ -44,7 +58,7 @@
             android:textColor="#000"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvemailClient" />
+            app:layout_constraintTop_toBottomOf="@+id/tvemailChauffeurCommande" />
 
         <TextView
             android:id="@+id/tvDateLivraison"

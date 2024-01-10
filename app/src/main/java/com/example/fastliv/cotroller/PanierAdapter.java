@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
@@ -41,9 +41,7 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.PanierView
         this.products = products;
 
 
-        dataAdapter = ArrayAdapter.createFromResource(this.context
-                , R.array.Quantites, android.R.layout.simple_spinner_item);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
 
     }
 
@@ -66,7 +64,6 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.PanierView
                 .into(holder.ivProduct);
         holder.tvName.setText(p.getNom());
         holder.tvPrix.setText(p.getPrix());
-        holder.spinner.setAdapter(dataAdapter);
 
 
     }
@@ -80,7 +77,6 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.PanierView
 
         ImageView ivProduct;
         TextView tvName, tvPrix;
-        public Spinner spinner;
         String quantite;
         Button btnSupprimer;
         Activity activity;
@@ -93,27 +89,8 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.PanierView
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvPrix = (TextView) itemView.findViewById(R.id.tvPrix);
             btnSupprimer = (Button) itemView.findViewById(R.id.btn_supprimer);
-            spinner = (Spinner)itemView.findViewById(R.id.spinner_prix);
             activity = new Activity();
             List<Produit> listProduitSelectione = new ArrayList<Produit>();
-
-
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    // On selecting a spinner item
-                    String item = parent.getItemAtPosition(position).toString();
-                    quantite = parent.getItemAtPosition(position).toString();
-                    // Showing selected spinner item
-                    //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
 
             btnSupprimer.setOnClickListener(new View.OnClickListener() {
                 @Override

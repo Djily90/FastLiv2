@@ -1,8 +1,8 @@
 package com.example.fastliv.model;
 
 import com.bumptech.glide.util.Util;
-import org.osmdroid.util.GeoPoint;
-
+import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +12,7 @@ public class Livraison {
     private GeoPoint adresse;
     private Utilisateur chauffeur;
     private List<Commande> commandes;
+    private String emailChauffeur;
 
 
 
@@ -20,20 +21,22 @@ public class Livraison {
 
     }
     public Livraison(String statutLivraison, Utilisateur chauffeur, GeoPoint adresse,
-                     List<Commande> commandes, String emailClient) {
+                     List<Commande> commandes, String emailClient,String emailChauffeur) {
         super();
         this.statutLivraison = statutLivraison;
         this.chauffeur = chauffeur;
         this.adresse = adresse;
         this.commandes = commandes;
         this.emailClient = emailClient;
+        this.emailChauffeur = emailChauffeur;
     }
 
-    public Livraison(String statutLivraison, GeoPoint adresse, String emailClient) {
+    public Livraison(String statutLivraison, GeoPoint adresse, String emailClient,String emailChauffeur) {
 
         this.statutLivraison = statutLivraison;
         this.adresse = adresse;
         this.emailClient = emailClient;
+        this.emailChauffeur = emailChauffeur;
     }
 
 
@@ -43,11 +46,17 @@ public class Livraison {
     public void setStatutLivraison(String statutLivraison) {
         this.statutLivraison = statutLivraison;
     }
-    public String getEmailClient() {
-        return emailClient;
+    public String getEmailChauffeur() {
+        return emailChauffeur;
     }
     public void setEmailClient(String emailClient) {
         this.emailClient = emailClient;
+    }
+    public String getEmailClient() {
+        return emailClient;
+    }
+    public void setEmailChauffeur(String emailChauffeur) {
+        this.emailChauffeur = emailChauffeur;
     }
     public Utilisateur getChauffeur() {
         return chauffeur;

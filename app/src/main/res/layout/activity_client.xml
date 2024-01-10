@@ -34,15 +34,15 @@
 
     <TextView
         android:id="@+id/titre_client"
-        android:layout_width="111dp"
-        android:layout_height="25dp"
+        android:layout_width="119dp"
+        android:layout_height="34dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="124dp"
-        android:text="@string/client"
         android:drawableLeft="@android:drawable/ic_dialog_info"
         android:drawablePadding="6sp"
         android:drawableTint="@color/white"
+        android:text="@string/client"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
