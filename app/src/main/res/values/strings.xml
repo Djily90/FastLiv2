@@ -32,6 +32,9 @@
     <string name="panier">Panier</string>
     <string name="adresse">Adresse</string>
     <string name="commander">Commander</string>
+    <string name="voirPlus">Voir plus</string>
+    <string name="planificateur">Planificateur</string>
+    <string name="assignerChauffeur">Assignation</string>
 
     <string-array name="Roles">
         <item>Chauffeur</item>

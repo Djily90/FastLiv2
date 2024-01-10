@@ -33,7 +33,7 @@ public class Mission {
     public void addItineaire() {
         for (Livraison liv: this.livraisons
         ) {
-            this.itineaires.add(liv.getLatLong());
+            //this.itineaires.add(liv.getLatLong());
         }
     }
 

@@ -34,8 +34,8 @@ public class UtilisateurBDD {
 
 
     public void addUserToCollection(Utilisateur u){
-        Utilisateur userWithoutPassword = new Utilisateur(u.getUuid(),u.getEmail(),
-                u.getTelephone(),u.getRole(), u.getImmatriculation());
+        Utilisateur userWithoutPassword = new Utilisateur(u.getEmail(),
+                u.getTelephone(),u.getRole(), u.getImmatriculation(), u.getStatutChauffeur());
         db.collection("utilisateurs")
                 .add(userWithoutPassword)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {

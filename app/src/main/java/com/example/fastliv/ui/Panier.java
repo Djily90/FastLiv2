@@ -20,12 +20,10 @@ import android.widget.Toast;
 
 import com.example.fastliv.R;
 import com.example.fastliv.cotroller.PanierAdapter;
-import com.example.fastliv.model.Client;
 import com.example.fastliv.model.Commande;
 import com.example.fastliv.model.Produit;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -74,7 +72,6 @@ public class Panier extends AppCompatActivity implements View.OnClickListener{
                 if (produits != null) {
 
                     // panierList.clear(); // Clear the current list
-                    double total = 0;
                     for (Map<String, Object> produitMap : produits) {
                         Produit produit = new Produit();
                         produit.setNom((String) produitMap.get("nom"));
@@ -109,7 +106,7 @@ public class Panier extends AppCompatActivity implements View.OnClickListener{
             }
             else {
 
-                GeoPoint geoPoint = null;
+                GeoPoint geoPoint;
                 try {
                     geoPoint = getAdresseFinal(inputAdresse.getText().toString());
                 } catch (IOException e) {
@@ -117,6 +114,7 @@ public class Panier extends AppCompatActivity implements View.OnClickListener{
                 }
 
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String userEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
                 // Convertissez la date de livraison de String en Date
                 String dateLivraisonString = textViewDateLivraison.getText().toString();
@@ -137,8 +135,9 @@ public class Panier extends AppCompatActivity implements View.OnClickListener{
                 // Créez la commande avec la date et l'adresse converties
                 Commande commande = new Commande();
                 commande.setAdresse(geoPoint);
-                commande.setStatut(false);
+                commande.setStatut("en cours");
                 commande.setIdClient(userId);
+                commande.setIdClient(userEmail);
                 commande.setProduits(panierList);
                 commande.setDateLivraison(dateLivraison);
 
@@ -156,9 +155,9 @@ public class Panier extends AppCompatActivity implements View.OnClickListener{
         List<Address> address = geoCoder.getFromLocationName(locationName, 1);
         double latitude = address.get(0).getLatitude();
         double longitude = address.get(0).getLongitude();
-        GeoPoint adresse = new GeoPoint(latitude, longitude);
+        GeoPoint adr = new GeoPoint(latitude, longitude);
 
-        return adresse;
+        return adr;
     }
 
     private void showDatePickerDialog() {

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
+    app:cardCornerRadius="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="0dp">
+
+
+        <TextView
+            android:id="@+id/tvemailClient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="emailClient"
+            android:drawableLeft="@android:drawable/sym_action_email"
+            android:drawableTint="@color/principal"
+            android:drawablePadding="2sp"
+            android:textColor="#000"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tvStatutCommande"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@android:drawable/stat_notify_error"
+            android:drawableTint="@color/principal"
+            android:drawablePadding="7sp"
+
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="statut"
+            android:textColor="#000"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvemailClient" />
+
+        <TextView
+            android:id="@+id/tvDateLivraison"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:drawableLeft="@android:drawable/ic_menu_agenda"
+            android:drawableTint="@color/principal"
+            android:layout_marginTop="5dp"
+            android:drawablePadding="1sp"
+            android:text="date"
+            android:textColor="#000"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvStatutCommande" />
+
+
+        <TextView
+            android:id="@+id/tvAdresseCommande"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="1dp"
+            android:drawablePadding="1sp"
+            android:text="adresse"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDateLivraison" />
+
+        <TextView
+            android:id="@+id/tvIdClient"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="1dp"
+            android:drawablePadding="1sp"
+            android:text="idClient"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDateLivraison" />
+
+
+        <Button
+            android:id="@+id/btn_voir_commande"
+
+            android:layout_width="58dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="16dp"
+            android:text="+"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:iconPadding="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

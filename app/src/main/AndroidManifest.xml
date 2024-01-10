@@ -13,6 +13,9 @@
         android:theme="@style/Theme.FastLiv"
         tools:targetApi="31">
         <activity
+            android:name=".ui.Planificateur"
+            android:exported="true" />
+        <activity
             android:name=".ui.Panier"
             android:exported="true" />
         <activity
@@ -23,6 +26,9 @@
             android:exported="true" />
         <activity
             android:name=".ui.Inscription"
+            android:exported="true" />
+        <activity
+            android:name=".ui.AssignerChauffeur"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

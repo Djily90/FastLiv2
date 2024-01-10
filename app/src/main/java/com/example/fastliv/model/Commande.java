@@ -15,14 +15,25 @@ public class Commande {
     private List<Produit> produits = new ArrayList<>();
     private String idClient;
     private GeoPoint adresse;
-    private boolean statut;
+    private String statut;
     private Date dateLivraison;
+
+    private String emailClient;
+
 
     public Commande(){
 
     }
-    public Commande(List<Produit> produits, String idClient, GeoPoint adresse, boolean statut, Date dateLivraison){
+    public Commande(List<Produit> produits, String idClient, GeoPoint adresse, String statut, Date dateLivraison){
         this.produits = produits;
+        this.idClient = idClient;
+        this.adresse = adresse;
+        this.statut = statut;
+        this.dateLivraison = dateLivraison;
+    }
+
+    public Commande(String emailClient, String idClient, GeoPoint adresse, String statut, Date dateLivraison){
+        this.emailClient = emailClient;
         this.idClient = idClient;
         this.adresse = adresse;
         this.statut = statut;
@@ -34,6 +45,13 @@ public class Commande {
     }
     public void setProduits(List<Produit> produit) {
         this.produits=produit;
+    }
+
+    public String getEmailClient(){
+        return emailClient;
+    }
+    public void setEmailClient(String emailClient){
+        this.emailClient = emailClient;
     }
 
     public String getIdClient(){
@@ -50,10 +68,10 @@ public class Commande {
         this.adresse = adrese;
     }
 
-    public boolean getStatut(){
+    public String getStatut(){
         return statut;
     }
-    public void setStatut(Boolean statut){
+    public void setStatut(String statut){
         this.statut = statut;
     }
 

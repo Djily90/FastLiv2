@@ -1,16 +1,15 @@
 package com.example.fastliv.model;
 
+import com.bumptech.glide.util.Util;
 import com.google.firebase.firestore.GeoPoint;
 
 import java.util.Date;
 import java.util.List;
 
 public class Livraison {
-    private Date dateLivraison;
     private String statutLivraison;
-    private String adresse;
-    private GeoPoint latLong;
-    private Chauffeur chauffeur;
+    private GeoPoint adresse;
+    private Utilisateur chauffeur;
     private List<Commande> commandes;
 
 
@@ -19,10 +18,9 @@ public class Livraison {
     public Livraison() {
 
     }
-    public Livraison(Date dateLivraison, String statutLivraison, Chauffeur chauffeur, String adresse,
+    public Livraison(String statutLivraison, Utilisateur chauffeur, GeoPoint adresse,
                      List<Commande> commandes) {
         super();
-        this.dateLivraison = dateLivraison;
         this.statutLivraison = statutLivraison;
         this.chauffeur = chauffeur;
         this.adresse = adresse;
@@ -30,34 +28,26 @@ public class Livraison {
     }
 
 
-
-
-    public Date getDateLivraison() {
-        return dateLivraison;
-    }
-    public void setDateLivraison(Date dateLivraison) {
-        this.dateLivraison = dateLivraison;
-    }
     public String getStatutLivraison() {
         return statutLivraison;
     }
     public void setStatutLivraison(String statutLivraison) {
         this.statutLivraison = statutLivraison;
     }
-    public Chauffeur getChauffeur() {
+    public Utilisateur getChauffeur() {
         return chauffeur;
     }
-    public void setChauffeur(Chauffeur chauffeur) {
+    public void setChauffeur(Utilisateur chauffeur) {
         this.chauffeur = chauffeur;
     }
 
 
-    public String getAdresse() {
+    public GeoPoint getAdresse() {
         return adresse;
     }
 
 
-    public void setAdresse(String adresse) {
+    public void setAdresse(GeoPoint adresse) {
         this.adresse = adresse;
     }
 
@@ -69,20 +59,6 @@ public class Livraison {
         this.commandes.add(commande);
     }
 
-    public GeoPoint getLatLong() {
-        return latLong;
-    }
-
-
-    public void setLatLong(GeoPoint latLong) {
-        this.latLong = latLong;
-    }
-
-
-    GeoPoint getLatLongByAdresse(String adresse) {
-        // Fonction pour convertir obtenir la latitude et la longitude depuis une adresse
-        return null;
-    }
 
 
 

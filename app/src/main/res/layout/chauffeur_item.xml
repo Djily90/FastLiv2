@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
+    app:cardCornerRadius="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="0dp">
+
+
+        <TextView
+            android:id="@+id/tvEmailChauffeur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="emailChauffeur"
+            android:drawableLeft="@android:drawable/sym_action_email"
+            android:textColor="#000"
+            android:drawableTint="@color/principal"
+
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tvStatutChauffeur"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@android:drawable/stat_notify_error"
+
+            android:drawablePadding="6sp"
+            android:drawableTint="@color/principal"
+            android:text="statut"
+
+            android:textColor="#000"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvEmailChauffeur" />
+
+        <TextView
+            android:id="@+id/tvNumeroChauffeur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:drawableTint="@color/principal"
+            android:drawablePadding="6sp"
+
+            android:text="numeroChauffeur"
+            android:drawableLeft="@android:drawable/stat_sys_phone_call"
+
+            android:textColor="#000"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvStatutChauffeur" />
+
+        <Button
+            android:id="@+id/btn_assigner_chauffeur"
+
+            android:layout_width="106dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="16dp"
+            android:text="assigner"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

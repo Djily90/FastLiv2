@@ -7,6 +7,8 @@ public class Utilisateur {
     private String password;
     private String role;
     private String immatriculation;
+    private String statutChauffeur;
+
 
 
     public Utilisateur() {
@@ -14,20 +16,22 @@ public class Utilisateur {
     }
 
 
-    public Utilisateur(String email, String telephone, String role, String immatriculation) {
+    public Utilisateur(String email, String telephone, String role, String immatriculation, String statutChauffeur) {
         this.email = email;
         this.telephone = telephone;
         this.role = role;
         this.immatriculation = immatriculation;
+        this.statutChauffeur = statutChauffeur;
     }
 
 
-    public Utilisateur(String uuid, String email, String telephone, String role, String immatriculation) {
+    public Utilisateur(String uuid, String email, String telephone, String role, String immatriculation, String statutChauffeur) {
         this.uuid =  uuid;
         this.email = email;
         this.telephone = telephone;
         this.role = role;
         this.immatriculation = immatriculation;
+        this.statutChauffeur = statutChauffeur;
     }
 
 
@@ -87,6 +91,14 @@ public class Utilisateur {
 
     public void setImmatriculation(String immatriculation) {
         this.immatriculation = immatriculation;
+    }
+
+    public String getStatutChauffeur() {
+        return statutChauffeur;
+    }
+
+    public void setStatutChauffeur(String statutChauffeur) {
+        this.statutChauffeur = statutChauffeur;
     }
 
 

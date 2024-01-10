@@ -34,6 +34,8 @@ public class Inscription extends AppCompatActivity  implements View.OnClickListe
     String inputRole;
     EditText inputImmatriculation;
 
+    String statutChauffeur;
+
     // [START declare_auth]
     private FirebaseAuth mAuth;
     private UtilisateurBDD utilisateurBDD;
@@ -67,12 +69,15 @@ public class Inscription extends AppCompatActivity  implements View.OnClickListe
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String[] choix = getResources().getStringArray(R.array.Roles);
-        inputRole = choix[position];
+        inputRole = choix[position];//statutChauffeur
+
         if (inputRole.equals("Chauffeur")) {
             inputImmatriculation.setVisibility(View.VISIBLE);
+            statutChauffeur = "disponible";
         }else {
             inputImmatriculation.setVisibility(View.INVISIBLE);
             inputImmatriculation.setText("");
+            statutChauffeur = "";
         }
     }
 
@@ -105,7 +110,7 @@ public class Inscription extends AppCompatActivity  implements View.OnClickListe
             else {
                 Utilisateur user = new Utilisateur(inputEmail.getText().toString(),
                 inputPhone.getText().toString(),
-                inputRole, inputImmatriculation.getText().toString());
+                inputRole, inputImmatriculation.getText().toString(), statutChauffeur);
                 createUser(user, inputPassword.getText().toString());
             }
 
