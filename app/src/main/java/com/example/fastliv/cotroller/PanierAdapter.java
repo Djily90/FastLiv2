@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.fastliv.R;
 import com.example.fastliv.model.Produit;
+import com.example.fastliv.ui.Panier;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -148,6 +149,8 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.PanierView
                     panierRef.update("produits", FieldValue.arrayRemove(produitToRemove))
                             .addOnSuccessListener(aVoid -> {
                                 Log.d("djily", "Produit retiré du panier");
+                                Panier panier = new Panier();
+                                panier.refreshActivity();
                             })
                             .addOnFailureListener(e -> Log.e("djily", "Erreur lors de la suppression du produit", e));
 

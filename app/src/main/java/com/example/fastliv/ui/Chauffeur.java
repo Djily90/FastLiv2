@@ -6,9 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fastliv.MainActivity;
 import com.example.fastliv.R;
 import com.example.fastliv.cotroller.ChauffeurAdapter;
 import com.example.fastliv.cotroller.LivraisonAdapter;
@@ -26,13 +29,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.GeoPoint;
+
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.api.IMapController;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
+import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
@@ -45,13 +49,27 @@ public class Chauffeur extends AppCompatActivity implements View.OnClickListener
 
     private RecyclerView revLivraison;
     TextView textViewTitreChauffeur;
+    ImageView btnRetourToMainActivity, voirMap;
+    List<Livraison> listLivraisons ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_livraison);
+        listLivraisons = new ArrayList<Livraison>();
 
         textViewTitreChauffeur = findViewById(R.id.titre_assignerChauffeur);
         textViewTitreChauffeur.setOnClickListener(this);
+
+        btnRetourToMainActivity = findViewById(R.id.btn_deconnecter_chauffeur);
+        btnRetourToMainActivity.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                Intent myInt = new Intent(Chauffeur.this, MainActivity.class);
+                startActivity(myInt);
+            }
+        });
+
+
 
 
 /*
@@ -83,7 +101,7 @@ public class Chauffeur extends AppCompatActivity implements View.OnClickListener
        // Log.d("djily", "date liv recu => " + commandeSelectionner.getAdresse().toString());
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        List<Livraison> listLivraisons = new ArrayList<Livraison>();
+
         db.collection("livraison")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -93,9 +111,11 @@ public class Chauffeur extends AppCompatActivity implements View.OnClickListener
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 //  Log.d("djily", "email chauffeur => " + document.get("email").toString());
+                                com.google.firebase.firestore.GeoPoint geoPointFirestore = (com.google.firebase.firestore.GeoPoint) document.get("adresse");
+                                org.osmdroid.util.GeoPoint geoPointOsmdroid = new org.osmdroid.util.GeoPoint(geoPointFirestore.getLatitude(), geoPointFirestore.getLongitude());
                                 listLivraisons.add(new Livraison(
                                         (String) document.get("statutLivraison"),
-                                        (GeoPoint) document.get("adresse"),
+                                        (GeoPoint) geoPointOsmdroid,
                                         (String) document.get("emailClient")
                                 ));
                             }
@@ -107,6 +127,24 @@ public class Chauffeur extends AppCompatActivity implements View.OnClickListener
                         }
                     }
                 });
+
+        voirMap = findViewById(R.id.btnVoirMap);
+        voirMap.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                Intent myInt = new Intent(Chauffeur.this, MapsActivity2.class);
+
+                List<GeoPoint> listGeopoints = new ArrayList<GeoPoint>();
+                for (Livraison l : listLivraisons){
+
+                    if(l.getStatutLivraison().equals("accepté")){
+                        listGeopoints.add(l.getAdresse());
+                    }
+                }
+
+                myInt.putParcelableArrayListExtra("ListGeoPoints", (ArrayList<GeoPoint>) listGeopoints);
+                startActivity(myInt);
+            }
+        });
 
     }
 

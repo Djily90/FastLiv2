@@ -84,6 +84,21 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDateChoisie" />
+    <TextView
+        android:id="@+id/titre_panierr"
+        android:layout_width="128dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/panier"
+
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/btn_retour_panier"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewDateChoisie"

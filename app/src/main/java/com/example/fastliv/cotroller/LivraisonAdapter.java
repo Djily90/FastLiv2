@@ -30,7 +30,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.GeoPoint;
+import org.osmdroid.util.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
@@ -141,11 +141,7 @@ public class LivraisonAdapter extends RecyclerView.Adapter<LivraisonAdapter.Chau
                 );
 
 
-
-
-
-                 AddLivraisonToFirebase(liv);
-
+                   AccepterLivraisonToFirebase(liv);
 
 
                 }
@@ -155,7 +151,7 @@ public class LivraisonAdapter extends RecyclerView.Adapter<LivraisonAdapter.Chau
 
         }
 
-        private void AddLivraisonToFirebase(Livraison livraison) {
+        private void AccepterLivraisonToFirebase(Livraison livraison) {
 
             // Récupérez l'utilisateur actuellement connecté
             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -183,6 +179,57 @@ public class LivraisonAdapter extends RecyclerView.Adapter<LivraisonAdapter.Chau
                                                             .add(livraison)
                                                             .addOnSuccessListener(documentReference -> {
                                                                 Toast.makeText(context, "Livraison acceptée.", Toast.LENGTH_LONG).show();
+                                                                context.startActivity(new Intent(context, Chauffeur.class));
+                                                            })
+                                                            .addOnFailureListener(e -> {
+
+                                                            });
+
+                                                }
+                                            })
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    //Toast.makeText(Panier.this, "Panier non vidé", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
+                                }
+                            } else {
+                                Log.d("djily", "Error getting documents: ", task.getException());
+                            }
+                        }
+                    });
+        }
+
+
+        private void RefuserLivraisonToFirebase(Livraison livraison) {
+
+            // Récupérez l'utilisateur actuellement connecté
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if (currentUser == null) {
+                Toast.makeText(context, "Aucun chauffeur connecté.", Toast.LENGTH_SHORT).show();
+                return; // Arrêter la méthode si aucun utilisateur n'est connecté
+            }
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("livraison")
+                    .whereEqualTo("emailClient", livraison.getEmailClient())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    db.collection("livraison").document(document.getId())
+                                            .delete()
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                    livraison.setStatutLivraison("refusé");
+                                                    db.collection("livraison")
+                                                            .add(livraison)
+                                                            .addOnSuccessListener(documentReference -> {
+                                                                Toast.makeText(context, "Livraison reusée.", Toast.LENGTH_LONG).show();
                                                                 context.startActivity(new Intent(context, Chauffeur.class));
                                                             })
                                                             .addOnFailureListener(e -> {

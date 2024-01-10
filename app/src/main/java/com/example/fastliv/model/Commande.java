@@ -3,7 +3,8 @@ package com.example.fastliv.model;
 import android.location.Address;
 import android.location.Geocoder;
 
-import com.google.firebase.firestore.GeoPoint;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.util.GeoPoint;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -29,7 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.GeoPoint;
+import org.osmdroid.util.GeoPoint;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -147,7 +147,7 @@ public class Panier extends AppCompatActivity implements View.OnClickListener{
                 commande.setAdresse(geoPoint);
                 commande.setStatut("en cours");
                 commande.setIdClient(userId);
-                commande.setIdClient(userEmail);
+                commande.setEmailClient(userEmail);
                 commande.setProduits(panierList);
                 commande.setDateLivraison(dateLivraison);
 
@@ -230,11 +230,11 @@ public class Panier extends AppCompatActivity implements View.OnClickListener{
                 });
     }
 
-    public void goToClient() {
-        Intent myInt = new Intent(Panier.this, com.example.fastliv.ui.Client.class);
-        startActivity(myInt);
-        //         startActivity(new Intent(Client.this, Panier.class));
+    public void refreshActivity(){
+        refreshActivity();
     }
+
+
 
 
 }

@@ -23,43 +23,46 @@
 
     <TextView
         android:id="@+id/titre_assignerChauffeur"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
+        android:layout_width="146dp"
+        android:layout_height="35dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="24dp"
-        android:text="@string/chauffeur"
-        android:textAlignment="center"
         android:drawableLeft="@android:drawable/ic_dialog_info"
         android:drawablePadding="6sp"
         android:drawableTint="@color/white"
+        android:text="@string/chauffeur"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/btn_deconnecter_chauffeur"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <org.osmdroid.views.MapView
-        android:id="@+id/mapView"
-        android:layout_width="367dp"
-        android:layout_height="244dp"
-        android:layout_marginTop="56dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintTop_toBottomOf="@+id/revChauffeur"
-        tools:layout_editor_absoluteX="22dp" />
+    <ImageView
+        android:id="@+id/btnVoirMap"
+        android:layout_width="28dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="6dp"
+        android:contentDescription="@string/btnMap"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/panier" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/revChauffeur"
-        android:layout_width="380dp"
-        android:layout_height="336dp"
+        android:layout_width="377dp"
+        android:layout_height="571dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="44dp"
         android:background="#162471"
         android:padding="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_deconnecter_chauffeur"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/titre_assignerChauffeur" />
 
 
 

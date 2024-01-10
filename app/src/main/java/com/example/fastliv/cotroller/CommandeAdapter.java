@@ -20,7 +20,7 @@ import com.example.fastliv.model.Commande;
 import com.example.fastliv.ui.AssignerChauffeur;
 import com.example.fastliv.ui.Planificateur;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.GeoPoint;
+import org.osmdroid.util.GeoPoint;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

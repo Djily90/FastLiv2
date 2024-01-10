@@ -24,7 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.GeoPoint;
+import org.osmdroid.util.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.type.DateTime;
@@ -66,7 +66,11 @@ public class Planificateur extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("djily", document.getId() + " Date => " + document.get("dateLivraison"));
-                                listCommandes.add(new Commande(document.get("emailClient").toString(),document.get("idClient").toString(), (GeoPoint) document.get("adresse"),document.get("statut").toString(), document.getTimestamp("dateLivraison").toDate()));
+                                listCommandes.add(new Commande((String) document.get("emailClient")
+                                        ,(String) document.get("idClient")
+                                        ,(GeoPoint) document.get("adresse")
+                                        ,(String) document.get("statut"),
+                                        document.getTimestamp("dateLivraison").toDate()));
                             }
                             revCommandes = findViewById(R.id.revCommandes);
                             revCommandes.setLayoutManager(new LinearLayoutManager(Planificateur.this));
@@ -97,8 +101,6 @@ public class Planificateur extends AppCompatActivity implements View.OnClickList
                                             equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
                                         Intent myIntent = new Intent(v.getContext(), updateUser.class);
                                         myIntent.putExtra("telephone", document.get("telephone").toString());
-                                        myIntent.putExtra("uuid", document.get("uuid").toString());
-                                        myIntent.putExtra("role", document.get("role").toString());
                                         myIntent.putExtra("immatriculation", document.get("immatriculation").toString());
                                         myIntent.putExtra("email", document.get("email").toString());
                                         myIntent.putExtra("statutChauffeur", document.get("statutChauffeur").toString());

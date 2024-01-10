@@ -1,7 +1,7 @@
 package com.example.fastliv.model;
 
 import com.bumptech.glide.util.Util;
-import com.google.firebase.firestore.GeoPoint;
+import org.osmdroid.util.GeoPoint;
 
 import java.util.Date;
 import java.util.List;

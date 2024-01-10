@@ -23,14 +23,14 @@
 
     <TextView
         android:id="@+id/titre_planificateur"
-        android:layout_width="128dp"
+        android:layout_width="162dp"
         android:layout_height="24dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="24dp"
-        android:text="@string/planificateur"
         android:drawableLeft="@android:drawable/ic_dialog_info"
         android:drawablePadding="6sp"
         android:drawableTint="@color/white"
+        android:text="@string/planificateur"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20sp"

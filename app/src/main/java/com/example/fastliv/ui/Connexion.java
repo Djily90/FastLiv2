@@ -4,14 +4,15 @@ package com.example.fastliv.ui;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.fastliv.MainActivity;
 import com.example.fastliv.R;
@@ -87,13 +88,13 @@ public class Connexion extends AppCompatActivity  implements View.OnClickListene
 
             else {
 
-                loginUser(inputEmail.getText().toString(), inputPassword.getText().toString());
+                loginUser(inputEmail.getText().toString(), inputPassword.getText().toString(), v.getContext());
             }
 
         }
     }
 
-    public void loginUser(String email, String password){
+    public void loginUser(String email, String password, Context context){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -104,7 +105,7 @@ public class Connexion extends AppCompatActivity  implements View.OnClickListene
                             //Log.d("djily", "signInWithEmail:success");
 
                             //Log.d("djily", user.getUid());
-                            getUserByUuid(user.getUid());
+                            getUserByUuid(user.getEmail(), context);
                         } else {
                             // If sign in fails, display a message to the user.
                             //Log.w("djily", "signInWithEmail:failure", task.getException());
@@ -114,9 +115,9 @@ public class Connexion extends AppCompatActivity  implements View.OnClickListene
                 });
     }
 
-    public void getUserByUuid(String uuid){
+    public void getUserByUuid(String email, Context context){
         db.collection("utilisateurs")
-                .whereEqualTo("uuid", uuid)
+                .whereEqualTo("email", email)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -131,16 +132,16 @@ public class Connexion extends AppCompatActivity  implements View.OnClickListene
                                 //Log.d("djily", "yesssssssss");
                                 Intent myInt1 = new Intent(Connexion.this, Client.class);
                                 startActivity(myInt1);
-                            }
-                            if (role.equals("Planificateur")){
+                            }else if (role.equals("Planificateur")){
                                 //Log.d("djily", "yesssssssss");
-                                Intent myInt2 = new Intent(Connexion.this, Planificateur.class);
-                                startActivity(myInt2 );
-                            }
-                            if (role.equals("Chauffeur")){
+                                Intent myInt3 = new Intent(Connexion.this, Planificateur.class);
+                                startActivity(myInt3);
+                            }else if (role.equals("Chauffeur")){
                                 //Log.d("djily", "yesssssssss");
                                 Intent myInt2 = new Intent(Connexion.this, Chauffeur.class);
-                                startActivity(myInt2 );
+                                startActivity(myInt2);
+                            }else {
+                                Toast.makeText(context, "Utilisateur non existe", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Log.d("djily", "Error getting documents: ", task.getException());
@@ -150,11 +151,6 @@ public class Connexion extends AppCompatActivity  implements View.OnClickListene
     }
 
 
-    public void goBack() {
-        Intent myIntent1 = new Intent(Connexion.this, MainActivity.class);
-        startActivity(myIntent1);
 
-
-    }
 
 }
