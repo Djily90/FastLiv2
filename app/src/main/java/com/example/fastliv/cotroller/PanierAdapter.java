@@ -104,7 +104,7 @@ public class PanierAdapter extends RecyclerView.Adapter<PanierAdapter.PanierView
                     String item = parent.getItemAtPosition(position).toString();
                     quantite = parent.getItemAtPosition(position).toString();
                     // Showing selected spinner item
-                    Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
 
                 }
 

@@ -9,11 +9,11 @@
     tools:ignore="KeyboardInaccessibleWidget">
 
     <Button
-        android:id="@+id/btn_inscrire"
+        android:id="@+id/btn_update"
         android:layout_width="270dp"
         android:layout_height="52dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/inscrire"
+        android:text="Valider"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -115,34 +115,21 @@
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/titre_inscription"
+        android:id="@+id/titre_update"
         android:layout_width="111dp"
         android:layout_height="25dp"
-        android:layout_marginStart="124dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="152dp"
         android:layout_marginBottom="26dp"
-        android:text="@string/inscription"
+        android:text="Mise à jour"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/logo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_back_ins"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-
-    <ImageView
-        android:id="@+id/btn_back_ins"
-        android:layout_width="18dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="24dp"
-        android:contentDescription="btnBack"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/btn_back" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,6 @@
 package com.example.fastliv.ui;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,17 +14,26 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.fastliv.MainActivity;
 import com.example.fastliv.R;
+import com.example.fastliv.cotroller.ProductAdapter;
 import com.example.fastliv.cotroller.UtilisateurBDD;
+import com.example.fastliv.model.Produit;
 import com.example.fastliv.model.Utilisateur;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-public class Inscription extends AppCompatActivity  implements View.OnClickListener, AdapterView.OnItemSelectedListener{
+public class updateUser extends AppCompatActivity  implements View.OnClickListener, AdapterView.OnItemSelectedListener{
     Button btnInscrire;
     EditText inputEmail;
     EditText inputPassword;
@@ -40,27 +46,23 @@ public class Inscription extends AppCompatActivity  implements View.OnClickListe
     // [START declare_auth]
     private FirebaseAuth mAuth;
     private UtilisateurBDD utilisateurBDD;
-    ImageView btnGoToMain;
+    private String emailUser;
     // [END declare_auth]
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inscription);
+        setContentView(R.layout.activity_update_user);
         utilisateurBDD = new UtilisateurBDD();
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        btnInscrire = findViewById(R.id.btn_inscrire);
+        btnInscrire = findViewById(R.id.btn_update);
         btnInscrire.setOnClickListener(this);
+        emailUser = getIntent().getStringExtra("email");
 
-        btnGoToMain = findViewById(R.id.btn_back_ins);
-        btnGoToMain.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view) {
-                Intent myInt = new Intent(Inscription.this, MainActivity.class);
-                startActivity(myInt);
-            }
-        });
+       // Log.d("djily", getUserData().getRole());
+
 
         Spinner sp = findViewById(R.id.inscrire_role);
         sp.setOnItemSelectedListener(this);
@@ -74,6 +76,20 @@ public class Inscription extends AppCompatActivity  implements View.OnClickListe
         inputPhone = findViewById(R.id.inscrire_phone);
         inputRole = findViewById(R.id.inscrire_role).toString();
         inputImmatriculation = findViewById(R.id.inscrire_immatriculation);
+
+        inputEmail.setText(getIntent().getStringExtra("email"));
+        inputPhone.setText(getIntent().getStringExtra("telephone"));
+        inputRole= getIntent().getStringExtra("role");
+        inputImmatriculation.setText(getIntent().getStringExtra("immatriculation"));
+
+
+
+
+
+
+       // Log.d("djily", getUserData("djily@gmail.com").getRole());
+
+
 
     }
     @Override
@@ -93,7 +109,7 @@ public class Inscription extends AppCompatActivity  implements View.OnClickListe
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+        inputRole= getIntent().getStringExtra("role");
     }
 
     @Override
@@ -136,26 +152,60 @@ public class Inscription extends AppCompatActivity  implements View.OnClickListe
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            Toast.makeText(Inscription.this, "Utilisateur ajouté", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(updateUser.this, "Utilisateur ajouté", Toast.LENGTH_SHORT).show();
                             u.setUuid(user.getUid());
                             utilisateurBDD.addUserToCollection(u);
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("djily", "createUserWithEmail:success");
                             Log.d("djily", user.getEmail());
-                            Intent myIntent1 = new Intent(Inscription.this, MainActivity.class);
+                            Intent myIntent1 = new Intent(updateUser.this, MainActivity.class);
                             startActivity(myIntent1);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(Inscription.this, "Erreur de l'ajout", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(updateUser.this, "Erreur de l'ajout", Toast.LENGTH_SHORT).show();
                             Log.w("djily", "createUserWithEmail:failed");
                         }
                     }
                 });
     }
 
+    public Utilisateur getUserData(String email){
+        Utilisateur user =new Utilisateur();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        Log.d("djily", "Djilyyyyyyyyyyy");
+
+
+
+        db.collection("utilisateurs")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                if (document.get("email").toString().equals(email)){
+                                    Log.d("djily", "yessssssssssss");
+                                    user.setTelephone(document.get("telephone").toString());
+                                    user.setUuid(document.get("uuid").toString());
+                                    user.setRole(document.get("role").toString());
+                                    user.setImmatriculation(document.get("immatriculation").toString());
+                                    user.setEmail(document.get("email").toString());
+                                    user.setStatutChauffeur(document.get("statutChauffeur").toString());
+                                    user.setPassword(document.get("password").toString());
+                                }
+                            }
+                        } else {
+                            Log.d("djily", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+        return user;
+    }
+
 
     public void goBack() {
-        Intent myIntent1 = new Intent(Inscription.this, MainActivity.class);
+        Intent myIntent1 = new Intent(updateUser.this, MainActivity.class);
         startActivity(myIntent1);
     }
 }

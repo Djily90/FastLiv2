@@ -15,12 +15,12 @@
 
 
         <TextView
-            android:id="@+id/tvEmailChauffeur"
+            android:id="@+id/tvEmailClientLiv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:text="emailChauffeur"
+            android:text="emailLient"
             android:drawableLeft="@android:drawable/sym_action_email"
             android:textColor="#000"
             android:drawableTint="@color/principal"
@@ -31,51 +31,73 @@
 
 
         <TextView
-            android:id="@+id/tvStatutChauffeur"
+            android:id="@+id/tvStatutLiv"
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:drawableLeft="@android:drawable/stat_notify_error"
-
             android:drawablePadding="6sp"
             android:drawableTint="@color/principal"
             android:text="statut"
-
             android:textColor="#000"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvEmailChauffeur" />
-
+            app:layout_constraintTop_toBottomOf="@+id/tvEmailClientLiv" />
         <TextView
-            android:id="@+id/tvNumeroChauffeur"
+            android:id="@+id/tvAdresseLiv"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="21dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:drawableTint="@color/principal"
+            android:drawableLeft="@android:drawable/ic_menu_directions"
             android:drawablePadding="6sp"
-
-            android:text="numeroChauffeur"
-            android:drawableLeft="@android:drawable/stat_sys_phone_call"
-
+            android:drawableTint="@color/principal"
+            android:text="statut"
             android:textColor="#000"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvStatutChauffeur" />
+            app:layout_constraintTop_toBottomOf="@+id/tvStatutLiv" />
+
+        <TextView
+            android:id="@+id/tvAdresseComplet"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="1dp"
+            android:drawablePadding="1sp"
+            android:text="adrrComplet"
+            android:textColor="#000"
+            android:textSize="15sp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvAdresseLiv" />
 
         <Button
             android:id="@+id/btnAccepterLiv"
 
             android:layout_width="106dp"
             android:layout_height="41dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginEnd="16dp"
-            android:text="assigner"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="24dp"
+            android:text="accepter"
             android:textAlignment="center"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btnRefuserLiv"
+
+            android:layout_width="106dp"
+            android:layout_height="41dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="24dp"
+            android:text="refuser"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_red_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnAccepterLiv" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

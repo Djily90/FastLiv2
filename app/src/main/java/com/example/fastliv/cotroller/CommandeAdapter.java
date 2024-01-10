@@ -60,6 +60,11 @@ public class CommandeAdapter extends RecyclerView.Adapter<CommandeAdapter.Comman
         holder.tvIdClient.setText(c.getIdClient());
         holder.tvStatut.setText(c.getStatut());
         holder.tvDateLivraison.setText(c.getDateLivraison().toString());
+        if (c.getStatut().equals("en cours")){
+            holder.btnVoirCommande.setVisibility(View.VISIBLE);
+        }else {
+            holder.btnVoirCommande.setVisibility(View.INVISIBLE);
+        }
 
 
     }
@@ -87,11 +92,14 @@ public class CommandeAdapter extends RecyclerView.Adapter<CommandeAdapter.Comman
             tvAdresse = (TextView) itemView.findViewById(R.id.tvAdresseCommande);
             tvIdClient = (TextView) itemView.findViewById(R.id.tvIdClient);
             btnVoirCommande = (Button) itemView.findViewById(R.id.btn_voir_commande);
-            if (tvStatut.getText() == "en cours"){
+
+           /* if (tvStatut.getText().toString() != "en cours"){
                 btnVoirCommande.setVisibility(View.VISIBLE);
             }else {
                 btnVoirCommande.setVisibility(View.INVISIBLE);
             }
+
+            */
 
 
             btnVoirCommande.setOnClickListener(new View.OnClickListener() {

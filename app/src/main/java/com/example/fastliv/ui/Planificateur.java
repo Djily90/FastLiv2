@@ -5,12 +5,16 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fastliv.MainActivity;
 import com.example.fastliv.R;
 import com.example.fastliv.cotroller.CommandeAdapter;
 import com.example.fastliv.cotroller.ProductAdapter;
@@ -18,6 +22,7 @@ import com.example.fastliv.model.Commande;
 import com.example.fastliv.model.Produit;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -28,13 +33,28 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Planificateur extends AppCompatActivity {
+public class Planificateur extends AppCompatActivity implements View.OnClickListener{
 
     private RecyclerView revCommandes;
+    ImageView btnLogOutPlanificateur;
+    FirebaseAuth myAuth;
+    TextView textViewTitrePlanif;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_planificateur);
+
+        btnLogOutPlanificateur = findViewById(R.id.btn_logOut_planificateur);
+        btnLogOutPlanificateur.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                myAuth.signOut();
+                Intent myInt = new Intent(Planificateur.this, MainActivity.class);
+                startActivity(myInt);
+            }
+        });
+
+        textViewTitrePlanif = findViewById(R.id.titre_planificateur);
+        textViewTitrePlanif.setOnClickListener(this);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         List<Commande> listCommandes = new ArrayList<Commande>();
@@ -59,10 +79,45 @@ public class Planificateur extends AppCompatActivity {
 
     }
 
-    public void goToPlanification() {
-        Intent myInt = new Intent(Planificateur.this, Inscription.class);
-        startActivity(myInt);
-        //         startActivity(new Intent(Client.this, Panier.class));
+    @Override
+    public void onClick(View v) {
+        if (v == textViewTitrePlanif) {
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            db.collection("utilisateurs")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                    if (document.get("email").toString().
+                                            equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())){
+                                        Intent myIntent = new Intent(v.getContext(), updateUser.class);
+                                        myIntent.putExtra("telephone", document.get("telephone").toString());
+                                        myIntent.putExtra("uuid", document.get("uuid").toString());
+                                        myIntent.putExtra("role", document.get("role").toString());
+                                        myIntent.putExtra("immatriculation", document.get("immatriculation").toString());
+                                        myIntent.putExtra("email", document.get("email").toString());
+                                        myIntent.putExtra("statutChauffeur", document.get("statutChauffeur").toString());
+
+
+
+                                        startActivity(myIntent);
+
+
+                                    }
+                                }
+                            } else {
+                                Log.d("djily", "Error getting documents: ", task.getException());
+                            }
+                        }
+                    });
+
+        }
+
     }
 
 

@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
+    android:id="@+id/relativeLayoutLivraison"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#162471"
@@ -10,14 +10,13 @@
     tools:context=".ui.Client">
 
     <ImageView
-        android:id="@+id/btn_deconnexion"
+        android:id="@+id/btn_deconnexion_espace_client"
         android:layout_width="18dp"
         android:layout_height="25dp"
         android:layout_marginStart="6dp"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
         android:contentDescription="@string/btnLogOut"
-        android:onClick="goBack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logout" />
@@ -29,7 +28,6 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="6dp"
         android:contentDescription="@string/btnPanier"
-        android:onClick="goToPanier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/panier" />
@@ -42,12 +40,15 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="124dp"
         android:text="@string/client"
+        android:drawableLeft="@android:drawable/ic_dialog_info"
+        android:drawablePadding="6sp"
+        android:drawableTint="@color/white"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/btnPanier"
-        app:layout_constraintStart_toEndOf="@+id/btn_deconnexion"
+        app:layout_constraintStart_toEndOf="@+id/btn_deconnexion_espace_client"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -61,7 +62,7 @@
         android:background="#162471"
         android:padding="2dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_deconnexion"
+        app:layout_constraintTop_toBottomOf="@+id/btn_deconnexion_espace_client"
         app:layout_constraintTop_toTopOf="parent" />
 
 

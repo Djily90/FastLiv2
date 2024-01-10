@@ -1,12 +1,13 @@
 package com.example.fastliv.cotroller;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.fastliv.model.Commande;
 import com.example.fastliv.model.Produit;
-import com.example.fastliv.model.Utilisateur;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,7 +46,7 @@ public class CommandeBDD {
                 });
     }
 
-    public void addProductToPanier(Produit produit) {
+    public void addProductToPanier(Produit produit, Context context) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DocumentReference panierRef = db.collection("paniers").document(userId);
         Map<String, Object> produitToAdd = new HashMap<>();
@@ -55,7 +56,7 @@ public class CommandeBDD {
         produitToAdd.put("image", produit.getImage());
 
         panierRef.update("produits", FieldValue.arrayUnion(produitToAdd))
-                .addOnSuccessListener(aVoid -> Log.d("djily", "Produit ajouté au panier"))
+                .addOnSuccessListener(aVoid ->  Toast.makeText(context, "Produit ajouté", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e -> {
                     if (e instanceof FirebaseFirestoreException &&
                             ((FirebaseFirestoreException) e).getCode() == FirebaseFirestoreException.Code.NOT_FOUND) {

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.fastliv.MainActivity;
 import com.example.fastliv.R;
@@ -29,6 +30,7 @@ public class Connexion extends AppCompatActivity  implements View.OnClickListene
     Button btnConnecter;
     EditText inputEmail;
     EditText inputPassword;
+    ImageView btnRetourToMainActivity;
 
 
     // [START declare_auth]
@@ -53,6 +55,14 @@ public class Connexion extends AppCompatActivity  implements View.OnClickListene
 
         inputEmail = findViewById(R.id.connexion_email);
         inputPassword = findViewById(R.id.connexion_password);
+
+        btnRetourToMainActivity = findViewById(R.id.btn_back_espace_connexion);
+        btnRetourToMainActivity.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                Intent myInt = new Intent(Connexion.this, MainActivity.class);
+                startActivity(myInt);
+            }
+        });
 
 
 
@@ -119,8 +129,18 @@ public class Connexion extends AppCompatActivity  implements View.OnClickListene
                             }
                             if (role.equals("Client")){
                                 //Log.d("djily", "yesssssssss");
-                                Intent myInt = new Intent(Connexion.this, Client.class);
-                                startActivity(myInt );
+                                Intent myInt1 = new Intent(Connexion.this, Client.class);
+                                startActivity(myInt1);
+                            }
+                            if (role.equals("Planificateur")){
+                                //Log.d("djily", "yesssssssss");
+                                Intent myInt2 = new Intent(Connexion.this, Planificateur.class);
+                                startActivity(myInt2 );
+                            }
+                            if (role.equals("Chauffeur")){
+                                //Log.d("djily", "yesssssssss");
+                                Intent myInt2 = new Intent(Connexion.this, Chauffeur.class);
+                                startActivity(myInt2 );
                             }
                         } else {
                             Log.d("djily", "Error getting documents: ", task.getException());

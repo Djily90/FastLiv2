@@ -76,17 +76,16 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_back_connexion"
+        app:layout_constraintStart_toEndOf="@+id/btn_back_espace_connexion"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/btn_back_connexion"
+        android:id="@+id/btn_back_espace_connexion"
         android:layout_width="18dp"
         android:layout_height="25dp"
         android:layout_marginStart="6dp"
         android:layout_marginTop="24dp"
         android:contentDescription="@string/btnback"
-        android:onClick="goBack"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/btn_back" />

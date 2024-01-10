@@ -35,6 +35,7 @@
     <string name="voirPlus">Voir plus</string>
     <string name="planificateur">Planificateur</string>
     <string name="assignerChauffeur">Assignation</string>
+    <string name="chauffeur">Chauffeur</string>
 
     <string-array name="Roles">
         <item>Chauffeur</item>

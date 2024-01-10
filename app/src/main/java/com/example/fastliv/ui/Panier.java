@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,7 @@ public class Panier extends AppCompatActivity implements View.OnClickListener{
     EditText inputAdresse;
     TextView textViewDateLivraison;
     List<Produit> panierList = new ArrayList<Produit>();
+    ImageView btnRetourToPanier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,14 @@ public class Panier extends AppCompatActivity implements View.OnClickListener{
 
         textViewDateLivraison = findViewById(R.id.textViewDateChoisie);
         textViewDateLivraison.setOnClickListener(this);
+
+        btnRetourToPanier = findViewById(R.id.btn_retour_panier);
+        btnRetourToPanier.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View view) {
+                Intent myInt = new Intent(Panier.this, Client.class);
+                startActivity(myInt);
+            }
+        });
 
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();

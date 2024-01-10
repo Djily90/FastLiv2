@@ -19,8 +19,6 @@ import com.example.fastliv.R;
 import com.example.fastliv.model.Commande;
 import com.example.fastliv.model.Livraison;
 import com.example.fastliv.model.Utilisateur;
-import com.example.fastliv.ui.Client;
-import com.example.fastliv.ui.Panier;
 import com.example.fastliv.ui.Planificateur;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -91,7 +89,7 @@ public class ChauffeurAdapter extends RecyclerView.Adapter<ChauffeurAdapter.Chau
             tvEmalChauffeur = (TextView) itemView.findViewById(R.id.tvEmailChauffeur);
             tvStatutChauffeur = (TextView) itemView.findViewById(R.id.tvStatutChauffeur);
             tvNumeroChauffeur = (TextView) itemView.findViewById(R.id.tvNumeroChauffeur);
-            btnAssignerChauffeur = (Button) itemView.findViewById(R.id.btn_assigner_chauffeur);
+            btnAssignerChauffeur = (Button) itemView.findViewById(R.id.btnAccepterLiv);
             activity = new Activity();
             List<Utilisateur> listChauffeurs = new ArrayList<Utilisateur>();
             planificateur = new Planificateur();
@@ -103,9 +101,10 @@ public class ChauffeurAdapter extends RecyclerView.Adapter<ChauffeurAdapter.Chau
 
                @Override
                 public void onClick(View v) {
-                   Log.d("djily", " adresse commade choisi => "+commandeChoisi.getAdresse());
+
                     Utilisateur chauffeurassigner = new Utilisateur();
-                    for (Utilisateur u : listChauffeurs){
+                    for (Utilisateur u : chauffeurs){
+
                         if (u.getEmail() == tvEmalChauffeur.getText().toString()){
                             chauffeurassigner.setEmail(u.getEmail());
                             chauffeurassigner.setImmatriculation(u.getImmatriculation());
@@ -120,10 +119,11 @@ public class ChauffeurAdapter extends RecyclerView.Adapter<ChauffeurAdapter.Chau
                             "en cours",
                             chauffeurassigner,
                             commandeChoisi.getAdresse(),
-                            listCommande
+                            listCommande,
+                            commandeChoisi.getEmailClient()
                     );
 
-                   AddLivraisonToFirebase(livr);
+                 AddLivraisonToFirebase(livr);
 
 
 
@@ -145,7 +145,8 @@ public class ChauffeurAdapter extends RecyclerView.Adapter<ChauffeurAdapter.Chau
 
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             db.collection("livraison")
-                    .add(livraison)
+                    .document(livraison.getChauffeur().getEmail())
+                    .set(livraison)
                     .addOnSuccessListener(documentReference -> {
                         Toast.makeText(context, "Livraison ajoutée avec succès.", Toast.LENGTH_LONG).show();
 

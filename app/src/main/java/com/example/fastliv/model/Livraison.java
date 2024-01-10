@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Livraison {
     private String statutLivraison;
+    private String emailClient;
     private GeoPoint adresse;
     private Utilisateur chauffeur;
     private List<Commande> commandes;
@@ -19,12 +20,20 @@ public class Livraison {
 
     }
     public Livraison(String statutLivraison, Utilisateur chauffeur, GeoPoint adresse,
-                     List<Commande> commandes) {
+                     List<Commande> commandes, String emailClient) {
         super();
         this.statutLivraison = statutLivraison;
         this.chauffeur = chauffeur;
         this.adresse = adresse;
         this.commandes = commandes;
+        this.emailClient = emailClient;
+    }
+
+    public Livraison(String statutLivraison, GeoPoint adresse, String emailClient) {
+
+        this.statutLivraison = statutLivraison;
+        this.adresse = adresse;
+        this.emailClient = emailClient;
     }
 
 
@@ -33,6 +42,12 @@ public class Livraison {
     }
     public void setStatutLivraison(String statutLivraison) {
         this.statutLivraison = statutLivraison;
+    }
+    public String getEmailClient() {
+        return emailClient;
+    }
+    public void setEmailClient(String emailClient) {
+        this.emailClient = emailClient;
     }
     public Utilisateur getChauffeur() {
         return chauffeur;

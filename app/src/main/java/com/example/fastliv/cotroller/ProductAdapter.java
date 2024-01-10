@@ -100,7 +100,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                     String item = parent.getItemAtPosition(position).toString();
                     quantite = parent.getItemAtPosition(position).toString();
                     // Showing selected spinner item
-                    Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
 
                 }
 
@@ -123,7 +123,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
                         }
                     }
                     Produit p = new Produit(tvName.getText().toString(), quantite, urlImage ,tvPrix.getText().toString());
-                    commandeBDD.addProductToPanier(p);
+                    commandeBDD.addProductToPanier(p, context);
+
 
                 }
             });
