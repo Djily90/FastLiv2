@@ -10,7 +10,7 @@
     tools:context=".ui.AssignerChauffeur">
 
     <ImageView
-        android:id="@+id/btn_retour_planificateur"
+        android:id="@+id/btn_retour_to_planificateur"
         android:layout_width="18dp"
         android:layout_height="25dp"
         android:layout_marginStart="6dp"
@@ -32,7 +32,7 @@
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/btn_retour_planificateur"
+        app:layout_constraintStart_toEndOf="@+id/btn_retour_to_planificateur"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -46,7 +46,7 @@
         android:background="#162471"
         android:padding="2dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_retour_planificateur"
+        app:layout_constraintTop_toBottomOf="@+id/btn_retour_to_planificateur"
         app:layout_constraintTop_toTopOf="parent" />
 
 

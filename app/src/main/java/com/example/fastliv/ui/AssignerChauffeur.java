@@ -5,12 +5,15 @@ import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.fastliv.MainActivity;
 import com.example.fastliv.R;
 import com.example.fastliv.cotroller.ChauffeurAdapter;
 import com.example.fastliv.model.Commande;
@@ -26,13 +29,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class AssignerChauffeur extends AppCompatActivity {
+public class AssignerChauffeur extends AppCompatActivity implements View.OnClickListener{
 
     private RecyclerView revChauffeur;
+    ImageView btnRetourToPlanif;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assigner_chauffeur);
+
+        btnRetourToPlanif = findViewById(R.id.btn_retour_to_planificateur);
+        btnRetourToPlanif.setOnClickListener(this);
+
 
 
         Intent i= getIntent();
@@ -47,7 +55,7 @@ public class AssignerChauffeur extends AppCompatActivity {
                 Calendar.getInstance().getTime(),
                i.getStringExtra("emailChauffeur"));
 
-       
+
 
        // i.getStringExtra("name");
        // Log.d("djily", "date liv recu => " + commandeSelectionner.getAdresse().toString());
@@ -86,6 +94,11 @@ public class AssignerChauffeur extends AppCompatActivity {
     }
 
 
-
-
+    @Override
+    public void onClick(View v) {
+        if (v == btnRetourToPlanif){
+            Intent myInt = new Intent(AssignerChauffeur.this, Planificateur.class);
+            startActivity(myInt);
+        }
+    }
 }
