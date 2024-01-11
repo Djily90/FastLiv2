@@ -47,10 +47,7 @@ public class AssignerChauffeur extends AppCompatActivity {
                 Calendar.getInstance().getTime(),
                i.getStringExtra("emailChauffeur"));
 
-
-
-
-
+       
 
        // i.getStringExtra("name");
        // Log.d("djily", "date liv recu => " + commandeSelectionner.getAdresse().toString());

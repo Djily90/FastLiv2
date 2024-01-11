@@ -1,10 +1,12 @@
 package com.example.fastliv.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.fastliv.MainActivity;
 import com.example.fastliv.R;
 
 
@@ -17,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +31,17 @@ import org.osmdroid.tileprovider.MapTileProviderBasic;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.tileprovider.util.SimpleRegisterReceiver;
 import org.osmdroid.util.BoundingBox;
+
+import com.example.fastliv.model.Commande;
+import com.example.fastliv.model.Livraison;
+import com.example.fastliv.model.Utilisateur;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
@@ -320,11 +333,62 @@ public class MapsActivity2 extends AppCompatActivity implements View.OnClickList
 
     public void onClick(View view) {
         if(view == btnValiderLiv){
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            Livraison livraison = new Livraison();
+            db.collection("livraison")
+                    .whereEqualTo("emailChauffeur", emailChauffeur)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    livraison.setAdresse((com.google.firebase.firestore.GeoPoint) document.get("adresse"));
+                                    livraison.setEmailClient(document.get("emailClient").toString());
+                                    livraison.setEmailChauffeur(emailChauffeur);
+
+
+
+                                    if (document.get("statutLivraison").toString().equals("accepté")){
+                                        db.collection("livraison").document(document.getId())
+                                                .delete()
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        livraison.setStatutLivraison("Livré");
+                                                        db.collection("livraison")
+                                                                .add(livraison)
+                                                                .addOnSuccessListener(documentReference -> {
+                                                                    Toast.makeText(view.getContext(), "Livraison livré.", Toast.LENGTH_LONG).show();
+                                                                    view.getContext().startActivity(new Intent(view.getContext(), Chauffeur.class));
+                                                                })
+                                                                .addOnFailureListener(e -> {
+
+                                                                });
+
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        //Toast.makeText(Panier.this, "Panier non vidé", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                    }
+
+
+                                }
+                            } else {
+                                Log.d("djily", "Error getting documents: ", task.getException());
+                            }
+                        }
+                    });
 
         }
 
         if(view == btnAnnulerLiv){
-
+            Intent myInt = new Intent(MapsActivity2.this, Chauffeur.class);
+            startActivity(myInt);
         }
     }
 

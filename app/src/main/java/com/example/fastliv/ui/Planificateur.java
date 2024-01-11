@@ -47,7 +47,6 @@ public class Planificateur extends AppCompatActivity implements View.OnClickList
         btnLogOutPlanificateur = findViewById(R.id.btn_logOut_planificateur);
         btnLogOutPlanificateur.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                myAuth.signOut();
                 Intent myInt = new Intent(Planificateur.this, MainActivity.class);
                 startActivity(myInt);
             }

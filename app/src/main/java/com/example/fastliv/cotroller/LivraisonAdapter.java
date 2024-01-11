@@ -173,6 +173,7 @@ public class LivraisonAdapter extends RecyclerView.Adapter<LivraisonAdapter.Chau
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
+
                                     db.collection("livraison").document(document.getId())
                                             .delete()
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {

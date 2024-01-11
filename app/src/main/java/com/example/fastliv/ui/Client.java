@@ -55,7 +55,6 @@ public class Client extends AppCompatActivity implements View.OnClickListener{
         btnSignOut = findViewById(R.id.btn_deconnexion_espace_client);
         btnSignOut.setOnClickListener(new View.OnClickListener(){
             public void onClick(View view) {
-                mAuth.signOut();
                 Intent myInt5 = new Intent(Client.this, Connexion.class);
                 startActivity(myInt5);
             }

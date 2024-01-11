@@ -23,8 +23,8 @@
 
     <TextView
         android:id="@+id/titre_planificateur"
-        android:layout_width="169dp"
-        android:layout_height="36dp"
+        android:layout_width="196dp"
+        android:layout_height="39dp"
         android:layout_marginStart="124dp"
         android:layout_marginTop="24dp"
         android:drawableLeft="@android:drawable/ic_dialog_info"
@@ -41,18 +41,17 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/revCommandes"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="58dp"
-        android:layout_marginRight="15dp"
+        android:layout_width="372dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="9dp"
         android:background="#162471"
         android:padding="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_logOut_planificateur"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/titre_planificateur" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

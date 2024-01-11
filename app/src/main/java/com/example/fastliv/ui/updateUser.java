@@ -152,7 +152,7 @@ public class updateUser extends AppCompatActivity  implements View.OnClickListen
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            Toast.makeText(updateUser.this, "Utilisateur ajouté", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(updateUser.this, "Information modifiée", Toast.LENGTH_SHORT).show();
                             u.setUuid(user.getUid());
                             utilisateurBDD.addUserToCollection(u);
                             // Sign in success, update UI with the signed-in user's information
@@ -162,7 +162,7 @@ public class updateUser extends AppCompatActivity  implements View.OnClickListen
                             startActivity(myIntent1);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(updateUser.this, "Erreur de l'ajout", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(updateUser.this, "Erreur de la modification", Toast.LENGTH_SHORT).show();
                             Log.w("djily", "createUserWithEmail:failed");
                         }
                     }
@@ -172,7 +172,6 @@ public class updateUser extends AppCompatActivity  implements View.OnClickListen
     public Utilisateur getUserData(String email){
         Utilisateur user =new Utilisateur();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        Log.d("djily", "Djilyyyyyyyyyyy");
 
 
 
@@ -185,7 +184,6 @@ public class updateUser extends AppCompatActivity  implements View.OnClickListen
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 if (document.get("email").toString().equals(email)){
-                                    Log.d("djily", "yessssssssssss");
                                     user.setTelephone(document.get("telephone").toString());
                                     user.setUuid(document.get("uuid").toString());
                                     user.setRole(document.get("role").toString());
